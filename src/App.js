@@ -1,24 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Notes from './components/Notes';
+import AddNote from './components/AddNote';
+import EditNote from './components/EditNote';
+import tg, { initTelegram } from './telegram';
 import './App.css';
 
 function App() {
+  React.useEffect(() => {
+    initTelegram();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" exact component={Home} />
+          <Route path="/notes" component={Notes} />
+          <Route path="/add" component={AddNote} />
+          <Route path="/edit" component={EditNote} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
