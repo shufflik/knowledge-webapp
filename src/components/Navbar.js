@@ -16,9 +16,6 @@ const Navbar = () => {
       <NavLink to="/edit" className="nav-item" activeClassName="active">
         Edit Note
       </NavLink>
-      <NavLink to="/profile" className="nav-item" activeClassName="active">
-        Profile
-      </NavLink>
     </nav>
   );
 };
