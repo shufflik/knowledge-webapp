@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import tg, { initTelegram } from '../telegram';
+import { initTelegram } from '../telegram';
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);

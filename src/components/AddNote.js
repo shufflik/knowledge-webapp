@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import tg, { initTelegram, sendDataToBot } from '../telegram';
+import { sendDataToBot } from '../telegram';
 
 const AddNote = () => {
   const [note, setNote] = useState('');
