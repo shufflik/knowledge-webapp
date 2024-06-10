@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Notes from './components/Notes';
 import AddNote from './components/AddNote';
 import EditNote from './components/EditNote';
-import tg, { initTelegram } from './telegram';
+import { initTelegram } from './telegram';
 import './App.css';
 
 function App() {
