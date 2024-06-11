@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { initTelegram } from '../telegram';
+// import { initTelegram } from '../telegram';
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    initTelegram();
+    // initTelegram();
     const fetchNotes = async () => {
       try {
         const response = await axios.get('https://your-backend-url.com/notes');
