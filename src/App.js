@@ -14,7 +14,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/knowledge-webapp">
       <div className="App">
         <Navbar />
         <Routes>

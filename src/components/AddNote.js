@@ -17,7 +17,8 @@ const AddNote = () => {
     //   }
     // };
     useEffect(() => {
-        const userData = tg.initDataUnsafe
+        // const userData = tg.initData
+        const userData = "dfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdg"
         setUser(userData);
     }, []);
 
@@ -31,19 +32,24 @@ const AddNote = () => {
     ];
 
     return (
-        <div className="d-flex justify-content-center">
-            <div>
-                <p className="word-wrap">User data: {user}</p>
+        <div className="container text-center">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="word-break">User data: {user}</div>
+                </div>
             </div>
-            <div className="mb-3" style={{maxWidth: '400px', width: '100%'}}>
-                <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
-                <input className="form-control" list="datalistOptions" id="exampleDataList"
-                       placeholder="Type to search..."/>
-                <datalist id="datalistOptions">
-                    {listOfNames.map((option, index) => (
-                        <option key={index} value={option}/>
-                    ))}
-                </datalist>
+            <br/>
+            <div className="row justify-content-center">
+                <div className="mb-3" style={{maxWidth: '400px', width: '100%'}}>
+                    <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
+                    <input className="form-control" list="datalistOptions" id="exampleDataList"
+                           placeholder="Type to search..."/>
+                    <datalist id="datalistOptions">
+                        {listOfNames.map((option, index) => (
+                            <option key={index} value={option}/>
+                        ))}
+                    </datalist>
+                </div>
             </div>
         </div>
     );
