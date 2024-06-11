@@ -7,6 +7,7 @@ import './AddNote.css';
 const AddNote = () => {
     // const [note, setNote] = useState('Enter your note here...');
     const [user, setUser] = useState(null);
+    const [unSafeUser, setUnsafeUser] = useState(null);
     //
     // const handleAddNote = async () => {
     //   try {
@@ -17,9 +18,15 @@ const AddNote = () => {
     //   }
     // };
     useEffect(() => {
-        // const userData = tg.initData
-        const userData = "dfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdg"
+        const userData = tg.initData
+        // const userData = "dfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdg"
         setUser(userData);
+    }, []);
+
+    useEffect(() => {
+        const unSafeUserData = tg.initDataUnsafe
+        // const userData = "dfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdg"
+        setUnsafeUser(unSafeUserData);
     }, []);
 
 
@@ -36,6 +43,12 @@ const AddNote = () => {
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="word-break">User data: {user}</div>
+                </div>
+            </div>
+            <br/>
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="word-break">User data unsafe: {unSafeUser}</div>
                 </div>
             </div>
             <br/>
