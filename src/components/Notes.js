@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import NoteCard from './NoteCard';
 // import { initTelegram } from '../telegram';
 
