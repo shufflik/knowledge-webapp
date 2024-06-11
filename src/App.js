@@ -5,7 +5,7 @@ import Home from './components/Home';
 import Notes from './components/Notes';
 import AddNote from './components/AddNote';
 import EditNote from './components/EditNote';
-import { initTelegram } from './telegram';
+import {initTelegram, vibrate} from './telegram';
 import './App.css';
 
 function App() {
@@ -13,15 +13,19 @@ function App() {
     initTelegram();
   }, []);
 
+  const handleButtonClick = () => {
+    vibrate(200); // Вибрация на 200 миллисекунд при каждом нажатии на кнопку
+  };
+
   return (
     <Router>
       <div className="App">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/notes" element={<Notes />} />
-          <Route path="/add" element={<AddNote />} />
-          <Route path="/edit" element={<EditNote />} />
+          <Route path="/" element={<Home />} onClick={handleButtonClick} />
+          <Route path="/notes" element={<Notes />} onClick={handleButtonClick} />
+          <Route path="/add" element={<AddNote />} onClick={handleButtonClick} />
+          <Route path="/edit" element={<EditNote />} onClick={handleButtonClick} />
         </Routes>
       </div>
     </Router>
