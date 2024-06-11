@@ -26,8 +26,32 @@ export const closeTelegram = () => {
   }
 };
 
+export const openMainButton = () => {
+  if (tg.MainButton.isVisible) {
+    tg.MainButton.hide();
+  } else {
+    tg.MainButton.show();
+  }
+};
+
+export const openSettingsButton = () => {
+  if (tg.SettingsButton.isVisible) {
+    tg.SettingsButton.hide();
+  } else {
+    tg.SettingsButton.show();
+  }
+};
+
+export const openBackButton = () => {
+  if (tg.BackButton.isVisible) {
+    tg.BackButton.hide();
+  } else {
+    tg.BackButton.show();
+  }
+};
+
 export const vibrate = (pattern) => {
-  if ('vibrate' in navigator) {
+  if (navigator.vibrate) {
     navigator.vibrate(pattern);
   } else {
     console.log('Vibration API is not supported in this browser.');
