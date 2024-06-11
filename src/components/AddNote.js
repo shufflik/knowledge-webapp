@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import tg from "../telegram";
-import './App.css';
+import './AddNote.css';
 // import axios from 'axios';
 // import { sendDataToBot } from '../telegram';
 
