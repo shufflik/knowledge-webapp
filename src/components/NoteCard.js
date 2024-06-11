@@ -9,7 +9,7 @@ const NoteCard = ({note}) => {
                 <h5 className="card-title">{note.title}</h5>
                 <p className="card-text">{note.content}</p>
                 <a href={note.link.href} className="btn btn-primary">Open</a>
-                <a className="btn btn-primary">Setting</a>
+                <a href={note.link.href} className="btn btn-primary">Setting</a>
             </div>
         </div>
     );
