@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { sendDataToBot } from '../telegram';
+import React from 'react';
+// import axios from 'axios';
+// import { sendDataToBot } from '../telegram';
 
 const AddNote = () => {
-  const [note, setNote] = useState('Enter your note here...');
-
-  const handleAddNote = async () => {
-    try {
-      const response = await axios.post('https://your-backend-url.com/notes', { note });
-      sendDataToBot(`New note added: ${response.data.id}`);
-    } catch (error) {
-      console.error('Error adding note:', error);
-    }
-  };
+  // const [note, setNote] = useState('Enter your note here...');
+  //
+  // const handleAddNote = async () => {
+  //   try {
+  //     const response = await axios.post('https://your-backend-url.com/notes', { note });
+  //     sendDataToBot(`New note added: ${response.data.id}`);
+  //   } catch (error) {
+  //     console.error('Error adding note:', error);
+  //   }
+  // };
 
 
   const listOfNames = [
