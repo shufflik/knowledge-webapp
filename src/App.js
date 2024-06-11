@@ -22,8 +22,8 @@ function App() {
       <div className="App">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} onClick={handleButtonClick} />
-          <Route path="/notes" element={<Notes />} onClick={handleButtonClick} />
+          <Route index path="/" element={<Notes />} onClick={handleButtonClick} />
+          <Route path="/home" element={<Home />} onClick={handleButtonClick} />
           <Route path="/add" element={<AddNote />} onClick={handleButtonClick} />
           <Route path="/edit" element={<EditNote />} onClick={handleButtonClick} />
         </Routes>

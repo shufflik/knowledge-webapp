@@ -1,0 +1,29 @@
+/*body {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*}*/
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.card-text {
+    color: #121212;
+}
+
+.card-title {
+    color: #121212;
+}
+
+/*h1.text-center {*/
+/*    margin-bottom: 30px;*/
+/*}*/
