@@ -4,6 +4,7 @@ const tg = isTelegramWebApp ? window.Telegram.WebApp : null;
 export const initTelegram = () => {
   if (isTelegramWebApp) {
     tg.ready();
+    tg.expand();
   } else {
     console.log('Telegram WebApp is not defined. Running in local mode.');
   }
@@ -22,6 +23,14 @@ export const closeTelegram = () => {
     tg.close();
   } else {
     console.log('Closing local mode.');
+  }
+};
+
+export const vibrate = (pattern) => {
+  if ('vibrate' in navigator) {
+    navigator.vibrate(pattern);
+  } else {
+    console.log('Vibration API is not supported in this browser.');
   }
 };
 
