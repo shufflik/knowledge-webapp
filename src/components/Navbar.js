@@ -10,9 +10,6 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="navbar-header">
-        <h1>Build Number: 1.1 </h1>
-      </div>
       <NavLink to="/" className="nav-item" activeClassName="active" onClick={handleButtonClick}>
         Home
       </NavLink>
@@ -24,9 +21,6 @@ const Navbar = () => {
       </NavLink>
       <NavLink to="/edit" className="nav-item" activeClassName="active" onClick={handleButtonClick}>
         Edit Note
-      </NavLink>
-      <NavLink to="/profile" className="nav-item" activeClassName="active" onClick={handleButtonClick}>
-        Profile
       </NavLink>
     </nav>
   );
