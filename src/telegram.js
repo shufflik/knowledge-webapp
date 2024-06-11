@@ -1,9 +1,9 @@
 const isTelegramWebApp = window.Telegram !== undefined;
-const tg = isTelegramWebApp ? window.Telegram.WebApp : null;
+const tg = window.Telegram.WebApp;
 
 export const initTelegram = () => {
-  if (isTelegramWebApp && tg !== null) {
-    // tg.ready();
+  if (isTelegramWebApp) {
+    tg.ready();
     tg.expand();
   } else {
     console.log('Telegram WebApp is not defined. Running in local mode.');
