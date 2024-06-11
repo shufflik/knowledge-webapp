@@ -27,6 +27,9 @@ export const closeTelegram = () => {
 };
 
 export const openMainButton = () => {
+  tg.MainButton.color = "#2cab37"
+  tg.MainButton.textColor = "#FFFFFF"
+  tg.MainButton.setText("Create note")
   if (tg.MainButton.isVisible) {
     tg.MainButton.hide();
   } else {
@@ -43,6 +46,7 @@ export const openSettingsButton = () => {
 };
 
 export const openBackButton = () => {
+    tg.BackButton.setText("Notes")
   if (tg.BackButton.isVisible) {
     tg.BackButton.hide();
   } else {
@@ -50,12 +54,9 @@ export const openBackButton = () => {
   }
 };
 
-export const vibrate = (pattern) => {
-  if (navigator.vibrate) {
-    navigator.vibrate(pattern);
-  } else {
-    console.log('Vibration API is not supported in this browser.');
-  }
-};
+// eslint-disable-next-line no-undef
+Telegram.WebApp.onEvent("mainButtonClicked", function () {
+
+})
 
 export default tg;
