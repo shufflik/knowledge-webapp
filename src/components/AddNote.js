@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import tg from "../telegram";
+import './App.css';
 // import axios from 'axios';
 // import { sendDataToBot } from '../telegram';
 
@@ -16,7 +17,7 @@ const AddNote = () => {
     //   }
     // };
     useEffect(() => {
-        const userData = tg.initData
+        const userData = tg.initDataUnsafe
         setUser(userData);
     }, []);
 
@@ -31,7 +32,9 @@ const AddNote = () => {
 
     return (
         <div className="d-flex justify-content-center">
-            <p>User data: {user}</p>
+            <div>
+                <p className="word-wrap">User data: {user}</p>
+            </div>
             <div className="mb-3" style={{maxWidth: '400px', width: '100%'}}>
                 <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
                 <input className="form-control" list="datalistOptions" id="exampleDataList"

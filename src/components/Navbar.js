@@ -8,7 +8,7 @@ const Navbar = () => {
             <NavLink to="/" className="nav-item" activeClassName="active" >
                 Notes
             </NavLink>
-            <NavLink to="/addNote" className="nav-item" activeClassName="active" >
+            <NavLink to="/add" className="nav-item" activeClassName="active" >
                 Add Note
             </NavLink>
             <NavLink to="/edit" className="nav-item" activeClassName="active" >
