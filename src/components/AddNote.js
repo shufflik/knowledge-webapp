@@ -7,7 +7,6 @@ import './AddNote.css';
 const AddNote = () => {
     // const [note, setNote] = useState('Enter your note here...');
     const [user, setUser] = useState(null);
-    const [userr, setUnsafeUser] = useState(null);
     //
     // const handleAddNote = async () => {
     //   try {
@@ -22,12 +21,6 @@ const AddNote = () => {
         // const userData = "dfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdg"
         setUser(userData);
     }, []);
-
-    // useEffect(() => {
-    //     const unSafeUserData = tg.initDataUnsafe
-    //     // const userData = "dfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdgdfggfsgsdgsdg"
-    //     setUnsafeUser(unSafeUserData);
-    // }, []);
 
 
     const listOfNames = [

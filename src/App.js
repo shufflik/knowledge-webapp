@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Notes from './components/Notes';
@@ -9,23 +9,25 @@ import {initTelegram} from './telegram';
 import './App.css';
 
 function App() {
-  React.useEffect(() => {
-    initTelegram();
-  }, []);
+    React.useEffect(() => {
+        initTelegram();
+    }, []);
 
-  return (
-    <Router basename="/knowledge-webapp">
-      <div className="App">
-        <Navbar />
-        <Routes>
-          <Route index path="/" element={<Notes />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/add" element={<AddNote />} />
-          <Route path="/edit" element={<EditNote />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router basename="/knowledge-webapp">
+            <div className="App">
+                <Navbar/>
+                <div className="container mt-5 pt-5">
+                    <Routes>
+                        <Route index path="/" element={<Notes/>}/>
+                        <Route path="/home" element={<Home/>}/>
+                        <Route path="/add" element={<AddNote/>}/>
+                        <Route path="/edit" element={<EditNote/>}/>
+                    </Routes>
+                </div>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
