@@ -35,7 +35,8 @@ const AddNote = () => {
         <div className="container text-center">
             <div className="row justify-content-center">
                 <div className="col-md-6">
-                    <div className="word-break">User data: {user}</div>
+                    <div className="word-break">Receiver: {user?.receiver}</div>
+                    <div className="word-break">Data: {user?.data}</div>
                 </div>
             </div>
             <br/>
