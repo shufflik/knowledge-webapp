@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NoteCard.css';
 
