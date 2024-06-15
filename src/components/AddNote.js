@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import NoteNotSavedCard from "./NoteNotSavedCard";
+import {openMainButton} from "../telegram";
 
 const notSavedNotesTest = [
   {
@@ -53,6 +54,7 @@ const notSavedNotesTest = [
 const AddNote = () => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
@@ -75,10 +77,23 @@ const AddNote = () => {
         // fetchNotSavedNotes();
 
         setNotSavedNotes(notSavedNotesTest);
+
+        const isEnabled = inputValue.trim() !== '';
+        openMainButton("Save note", isEnabled, () => {
+            console.log("Button in Component A clicked");
+            // Ваша логика для Component A
+        });
+    }, [inputValue]);
+
+    useEffect(() => {
+        // Показать модальное окно только при первом монтировании компонента
         setShowModal(true);
     }, []);
 
     const handleClose = () => setShowModal(false);
+    const handleInputChange = (event) => {
+        setInputValue(event.target.value);
+    };
 
 
     const listOfNames = [
@@ -128,7 +143,7 @@ const AddNote = () => {
                 <div className="mb-3" style={{maxWidth: '400px', width: '100%'}}>
                     <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
                     <input className="form-control" list="datalistOptions" id="exampleDataList"
-                           placeholder="Type to search..."/>
+                           placeholder="Type to search..." value={inputValue} onChange={handleInputChange}/>
                     <datalist id="datalistOptions">
                         {listOfNames.map((option, index) => (
                             <option key={index} value={option}/>

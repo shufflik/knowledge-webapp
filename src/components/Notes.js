@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import NoteCard from './NoteCard';
+import {openMainButton} from "../telegram";
 
 const notesTest = [
   {
@@ -68,13 +69,18 @@ const Notes = () => {
     // };
     // fetchNotes();
     setNotes(notesTest)
+
+    openMainButton("Create note", true,() => {
+      console.log("Button in Component A clicked");
+      // Ваша логика для Component A
+    });
   }, []);
 
   return (
       <div className="container mt-5">
-        <div className="row">
+        <div className="row justify-content-center">
           {notes.map((note, index) => (
-              <div key={index} className="col-4 col-sm-4 col-md-4 mb-3 d-flex align-items-stretch">
+              <div key={index} className="col-5 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch">
                 <NoteCard note={note}/>
               </div>
           ))}

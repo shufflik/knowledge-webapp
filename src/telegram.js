@@ -26,15 +26,26 @@ export const closeTelegram = () => {
   }
 };
 
-export const openMainButton = () => {
-  tg.MainButton.color = "#2cab37"
-  tg.MainButton.textColor = "#FFFFFF"
-  tg.MainButton.setText("Create note")
-  if (tg.MainButton.isVisible) {
-    tg.MainButton.hide();
+export const openMainButton = (buttonText, isEnabled, callback) => {
+  tg.MainButton.color = "#2cab37";
+  tg.MainButton.textColor = "#FFFFFF";
+  tg.MainButton.setText(buttonText);
+
+  // if (tg.MainButton.isVisible) {
+  //   tg.MainButton.hide();
+  // } else {
+  //   tg.MainButton.show();
+  // }
+
+  if (isEnabled) {
+    tg.MainButton.enable();
   } else {
-    tg.MainButton.show();
+    tg.MainButton.disable();
   }
+
+  tg.MainButton.show();
+
+  tg.MainButton.onClick(callback);
 };
 
 export const openSettingsButton = () => {
@@ -46,7 +57,7 @@ export const openSettingsButton = () => {
 };
 
 export const openBackButton = () => {
-    tg.BackButton.setText("Notes")
+    // tg.BackButton.setText("Notes")
   if (tg.BackButton.isVisible) {
     tg.BackButton.hide();
   } else {

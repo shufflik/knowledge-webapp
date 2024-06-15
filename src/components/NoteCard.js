@@ -12,7 +12,7 @@ const NoteCard = ({note}) => {
     };
 
     return (
-        <Card className="mb-3">
+        <Card className="mb-3 card-size">
             <Card.Body className="d-flex flex-column">
                 <div className="d-flex justify-content-end mb-2 favorite-icon-container">
                     <div className="badge">
@@ -26,17 +26,12 @@ const NoteCard = ({note}) => {
                         </svg>
                     </div>
                 </div>
-                <OverlayTrigger placement="top" overlay={<Tooltip id={`tooltip-${note.id}`}>{note.title}</Tooltip>}>
-                    <Card.Title>{truncatedText}</Card.Title>
-                </OverlayTrigger>
-                <OverlayTrigger placement="top"
-                                overlay={<Tooltip id={`tooltip-${note.id}`}>{note.description}</Tooltip>}>
-                    <Card.Text>{truncatedDescription}</Card.Text>
-                </OverlayTrigger>
+                <Card.Title>{truncatedText}</Card.Title>
+                <Card.Text>{truncatedDescription}</Card.Text>
             </Card.Body>
-            <Card.Footer>
-                <small className="text-muted">#hello</small>
-            </Card.Footer>
+            {/*<Card.Footer>*/}
+            {/*    <small className="text-muted">#hello</small>*/}
+            {/*</Card.Footer>*/}
         </Card>
     );
 };
