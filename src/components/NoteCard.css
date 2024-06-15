@@ -1,29 +1,40 @@
-/*body {*/
-/*    background-color: #333;*/
-/*    color: #fff;*/
-/*}*/
-
-.card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.favorite-icon {
+    cursor: pointer;
+    transition: transform 0.2s;
+    margin-right: -7px; /* Сдвиг вправо */
+    margin-left: auto; /* Сдвиг влево */
 }
 
-.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
+.favorite-icon:active {
+    transform: scale(0.9);
 }
 
-.card-text {
-    color: #121212;
+.favorite-icon-container {
+    margin-top: -12px; /* Сдвиньте вверх для удаления отступа */
+}
+
+.badge span {
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #fed85d;
+    justify-content: center;
+    align-items: center;
+    margin-right: auto; /* Сдвиг вправо */
+    margin-left: -10px; /* Сдвиг влево */
 }
 
 .card-title {
-    color: #121212;
+    font-size: 15px
 }
 
-/*h1.text-center {*/
-/*    margin-bottom: 30px;*/
-/*}*/
+.card-text {
+    font-size: 10px
+}
+
+.text-muted {
+    font-size: 10px
+}

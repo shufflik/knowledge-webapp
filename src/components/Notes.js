@@ -1,38 +1,51 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import NoteCard from './NoteCard';
-// import { initTelegram } from '../telegram';
 
 const notesTest = [
   {
-    title: 'Card title 1',
-    content: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    link: { href: '#', text: 'Card link' }
+    "id": "ab502f3b-f94b-4044-a925-ae46e9a49b4e",
+    "created": true,
+    "created_date": "2024-06-15T17:00:47.524560",
+    "message_id": "1234",
+    "telegram_username": "test_username",
+    "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+    "theme_name": "test_theme1",
+    "title": "saved_test_title1_aaaaaaaaaaaaaaaaaaaaaaaaa",
+    "description": "saved_test_description1_aaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   {
-    title: 'Card title 2',
-    content: 'Some more example text for the second card.',
-    link: { href: '#', text: 'Card link' }
+    "id": "88e0c002-997f-41c6-b479-a079fd7f5c60",
+    "created": true,
+    "created_date": "2024-06-15T17:00:47.524564",
+    "message_id": "1235",
+    "telegram_username": "test_username",
+    "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+    "theme_name": "test_theme1",
+    "title": "saved_test_title2",
+    "description": "saved_test_description2"
   },
   {
-    title: 'Card title 3',
-    content: 'Some more example text for the second card.',
-    link: { href: '#', text: 'Card link' }
-  },
-      {
-    title: 'Card title 4',
-    content: 'Some quick example text to build on the card title and make up the bulk of the card\'s content.',
-    link: { href: '#', text: 'Card link' }
-  },
-  {
-    title: 'Card title 5',
-    content: 'Some more example text for the second card.',
-    link: { href: '#', text: 'Card link' }
+    "id": "382fafa6-106a-44b2-af95-1be644a2a9d5",
+    "created": true,
+    "created_date": "2024-06-15T17:00:47.524566",
+    "message_id": "1236",
+    "telegram_username": "test_username",
+    "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+    "theme_name": "test_theme1",
+    "title": "saved_test_title3_aaaaaaaaaaaaaaaaaaaaaaaaa",
+    "description": "saved_test_description3_aaaaaaaaaaaaaaaaaaaaaaaaa"
   },
   {
-    title: 'Card title 6',
-    content: 'Some more example text for the second card.',
-    link: { href: '#', text: 'Card link' }
+    "id": "a881643c-d6c9-433e-8853-ac28e35696ae",
+    "created": true,
+    "created_date": "2024-06-15T17:00:47.524568",
+    "message_id": "1237",
+    "telegram_username": "test_username",
+    "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+    "theme_name": "test_theme1",
+    "title": "saved_test_title4",
+    "description": "saved_test_description4"
   }
 ];
 
@@ -40,25 +53,28 @@ const Notes = () => {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
+    // console.info('Fetching notes..');
     // const fetchNotes = async () => {
     //   try {
-    //     const response = await axios.get('https://your-backend-url.com/notes');
+    //     const response = await axios.get('http://127.0.0.1:8000/notes',
+    //         {
+    //           params: {username: "test"}
+    //         }
+    //     );
     //     setNotes(response.data);
     //   } catch (error) {
     //     console.error('Error fetching notes:', error);
     //   }
     // };
-    //
     // fetchNotes();
     setNotes(notesTest)
   }, []);
 
   return (
       <div className="container mt-5">
-        <h1>Notes</h1>
         <div className="row">
           {notes.map((note, index) => (
-              <div key={index} className="col-md-4 mb-3 d-flex align-items-stretch">
+              <div key={index} className="col-4 col-sm-4 col-md-4 mb-3 d-flex align-items-stretch">
                 <NoteCard note={note}/>
               </div>
           ))}

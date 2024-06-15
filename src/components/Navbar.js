@@ -4,7 +4,7 @@ import './Navbar.css';
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-expand navbar-dark bg-dark fixed-bottom">
+        <nav className="navbar navbar-expand navbar-dark bg-dark fixed-top">
             <div className="container-fluid justify-content-center">
                 <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul className="navbar-nav">
