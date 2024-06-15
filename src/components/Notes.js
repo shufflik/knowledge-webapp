@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import NoteCard from './NoteCard';
 import {openMainButton} from "../telegram";
+import {useNavigate} from "react-router-dom";
 
 const notesTest = [
   {
@@ -52,6 +53,7 @@ const notesTest = [
 
 const Notes = () => {
   const [notes, setNotes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // console.info('Fetching notes..');
@@ -70,17 +72,17 @@ const Notes = () => {
     // fetchNotes();
     setNotes(notesTest)
 
-    openMainButton("Create note", true,() => {
+    openMainButton("Create note", true, "#2cab37", () => {
       console.log("Button in Component A clicked");
-      // Ваша логика для Component A
+      navigate('/add')
     });
-  }, []);
+  }, [navigate]);
 
   return (
       <div className="container mt-5">
         <div className="row justify-content-center">
           {notes.map((note, index) => (
-              <div key={index} className="col-5 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch">
+              <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch">
                 <NoteCard note={note}/>
               </div>
           ))}

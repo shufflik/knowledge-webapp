@@ -79,7 +79,9 @@ const AddNote = () => {
         setNotSavedNotes(notSavedNotesTest);
 
         const isEnabled = inputValue.trim() !== '';
-        openMainButton("Save note", isEnabled, () => {
+        const textButtonColor = inputValue.trim() !== '' ? "#2cab37" : "#FAFAFA00"
+
+        openMainButton("Save note", isEnabled, textButtonColor, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });

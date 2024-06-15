@@ -26,8 +26,8 @@ export const closeTelegram = () => {
   }
 };
 
-export const openMainButton = (buttonText, isEnabled, callback) => {
-  tg.MainButton.color = "#2cab37";
+export const openMainButton = (buttonText, isEnabled, color, callback) => {
+  tg.MainButton.color = color != null ? color : "#2cab37"
   tg.MainButton.textColor = "#FFFFFF";
   tg.MainButton.setText(buttonText);
 
