@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import tg, {mainButton} from "../telegram.js";
+// import React, {useEffect} from 'react';
+import tg from "../telegram.js";
 import {useNavigate} from "react-router-dom";
 
 const Home = () => {
@@ -9,9 +9,9 @@ const Home = () => {
         navigate('/');
     };
 
-    useEffect(() => {
-        mainButton(null, false, null);
-    }, []);
+    // useEffect(() => {
+    //     mainButton(null, false, null);
+    // }, []);
 
     return (
         <div>
