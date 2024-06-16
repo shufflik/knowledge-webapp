@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import NoteCard from './NoteCard';
-import {mainButton} from "../telegram";
+import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
 
 const notesTest = [
@@ -72,11 +72,11 @@ const Notes = () => {
     // fetchNotes();
     setNotes(notesTest)
 
-    mainButton("Create note", true, "#2cab37", () => {
+    mainButton("Create note", true, () => {
       console.log("Button in Component A clicked");
       navigate('/add')
     });
-    // backButton(false, null)
+    backButton(false, null)
   }, [navigate]);
 
   // useEffect(() => {

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import NoteNotSavedCard from "./NoteNotSavedCard";
-import {mainButton} from "../telegram";
+import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
 
 const notSavedNotesTest = [
@@ -86,13 +86,10 @@ const AddNote = () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });
-    }, [inputValue]);
-
-    // useEffect(() => {
-    //     backButton(true, () => {
-    //         navigate('/')
-    //     })
-    // }, [navigate]);
+        backButton(true, () => {
+            navigate('/')
+        })
+    }, [inputValue, navigate]);
 
     useEffect(() => {
         // Показать модальное окно только при первом монтировании компонента
