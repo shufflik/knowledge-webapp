@@ -28,23 +28,20 @@ export const closeTelegram = () => {
 };
 
 export const mainButton = (buttonText, isEnabled, callback) => {
-  tg.MainButton.color = "#2cab37"
-  tg.MainButton.textColor = "#FFFFFF";
-
-  if (buttonText !== '' || buttonText !== null) {
+  if (buttonText) {
     tg.MainButton.setText(buttonText);
   }
 
   if (isEnabled) {
+    tg.MainButton.color = "#2cab37"
+    tg.MainButton.textColor = "#FFFFFF";
     tg.MainButton.show();
-    tg.MainButton.enable();
   } else {
     tg.MainButton.hide();
-    tg.MainButton.disable();
   }
 
-  if (callback !== null) {
-      tg.MainButton.onClick(callback);
+  if (callback) {
+    tg.MainButton.onClick(callback);
   }
 };
 
