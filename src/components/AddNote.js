@@ -115,7 +115,7 @@ const AddNote = () => {
         backButton(true, () => {
             navigate('/')
         })
-    }, [selectedUnSavedNote, navigate]);
+    }, [selectedUnSavedNote, selectedTheme, navigate]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
