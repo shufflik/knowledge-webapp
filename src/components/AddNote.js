@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import NoteNotSavedCard from "./NoteNotSavedCard";
-import {backButton, mainButton} from "../telegram";
+import {mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
 
 const notSavedNotesTest = [

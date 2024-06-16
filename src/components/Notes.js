@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import axios from 'axios';
 import NoteCard from './NoteCard';
-import {backButton, mainButton} from "../telegram";
+import {mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
 
 const notesTest = [
