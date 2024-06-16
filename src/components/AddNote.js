@@ -3,8 +3,23 @@ import './AddNote.css';
 // import axios from "axios";
 import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
-import {Button, Offcanvas} from "react-bootstrap";
+import {Button, DropdownButton, InputGroup, Dropdown, Offcanvas, Form} from "react-bootstrap";
 import {Textfit} from "react-textfit";
+
+const themeList = [
+  {
+    "id": "71e50e69-cfea-4db7-a06d-35cfe81ac4aa",
+    "created_date": "2024-06-16T23:08:22.416462",
+    "telegram_username": "test_username",
+    "name": "test_theme1"
+  },
+  {
+    "id": "e7e06080-2da1-4b08-833b-3079357b58d2",
+    "created_date": "2024-06-16T23:08:22.416474",
+    "telegram_username": "test_username",
+    "name": "test_theme2"
+  }
+]
 
 const notSavedNotesTest = [
     {
@@ -56,7 +71,10 @@ const notSavedNotesTest = [
 const AddNote = () => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [show, setShow] = useState(false);
-    const [inputValue, setInputValue] = useState('');
+    // const [inputValue, setInputValue] = useState('');
+    const [selectedTheme, setSelectedTheme] = useState('');
+    const [selectedUnSavedNote, setSelectedUnSavedNote] = useState({ id: '', title: '', description: '', link: '' });
+
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
@@ -82,7 +100,8 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
 
-        const isEnabled = inputValue.trim() !== '';
+        const isEnabled = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+            && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== '';
         mainButton("Save note", isEnabled, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
@@ -90,7 +109,7 @@ const AddNote = () => {
         backButton(true, () => {
             navigate('/')
         })
-    }, [inputValue, navigate]);
+    }, [selectedUnSavedNote, navigate]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -111,23 +130,24 @@ const AddNote = () => {
     const handleOffcanvasShow = () => {
         setShow(true);
     }
-
-    const handleInputChange = (event) => {
-        setInputValue(event.target.value);
+    const handleSelectTheme = (eventKey) => {
+        setSelectedTheme(eventKey);
+    };
+    const handleUnSavedNoteClick = (note) => {
+        setSelectedUnSavedNote({id: note.id, title: note.title, description: note.description, link: note.link});
+        setShow(false);
     };
 
-    const listOfNames = [
-        "San Francisco",
-        "New York",
-        "Seattle",
-        "Los Angeles",
-        "Chicago"
-    ];
-
     return (
-        <div className="container text-center">
-            <Button variant="primary" onClick={handleOffcanvasShow} className="me-2">
+        <div className="container">
+            <Button variant="primary position-relative mb-5" onClick={handleOffcanvasShow} className="me-2">
                 Unsaved notes
+                {notSavedNotesTest && (
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {notSavedNotesTest.length}
+                        <span className="visually-hidden">unread messages</span>
+                </span>
+                )}
             </Button>
             <Offcanvas show={show} onHide={handleOffcanvasClose} placement="bottom"
                        style={{height: '70%', color: '#e8e8e8', backgroundColor: '#262626'}}>
@@ -139,12 +159,13 @@ const AddNote = () => {
                         {notSavedNote && notSavedNote.map((note, index) => (
                             <div key={index} className="row mb-3">
                                 <div className="note-card col d-flex justify-content-center align-items-center">
-                                    <button type="button" className="btn btn-primary d-flex justify-content-center align-items-center"
-                                            style={{width: '100%', height: '50px'}}>
+                                    <Button className="btn btn-primary d-flex justify-content-center align-items-center"
+                                            style={{width: '100%', height: '50px'}}
+                                            onClick={() => handleUnSavedNoteClick(note)}>
                                         <Textfit mode="single" max={15} style={{width: '100%', textAlign: 'center'}}>
                                             {note.title}
                                         </Textfit>
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         ))}
@@ -152,22 +173,53 @@ const AddNote = () => {
                 </Offcanvas.Body>
             </Offcanvas>
             <div className="row justify-content-center">
-                <div className="mb-3" style={{maxWidth: '400px', width: '100%'}}>
-                    <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
-                    <input className="form-control" list="datalistOptions" id="exampleDataList"
-                           placeholder="Type to search..." value={inputValue} onChange={handleInputChange}
-                           ref={inputRef}/>
-                    <datalist id="datalistOptions">
-                        {listOfNames.map((option, index) => (
-                            <option key={index} value={option}/>
+                <InputGroup className="mb-3">
+                    <Form.Control
+                        placeholder="Title"
+                        aria-label="Title"
+                        aria-describedby="title-addon"
+                        value={selectedUnSavedNote.title}
+                        onChange={(e) => setSelectedUnSavedNote(prevState => ({ ...prevState, title: e.target.value}))}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <Form.Control
+                        placeholder="Description"
+                        aria-label="Description"
+                        aria-describedby="description-addon"
+                        value={selectedUnSavedNote.description}
+                        onChange={(e) => setSelectedUnSavedNote(prevState => ({ ...prevState, description: e.target.value}))}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="url-addon">url</InputGroup.Text>
+                    <Form.Control
+                        placeholder="https://test.com"
+                        aria-label="Link"
+                        aria-describedby="url-addon"
+                        value={selectedUnSavedNote.link}
+                        onChange={(e) => setSelectedUnSavedNote(prevState => ({ ...prevState, link: e.target.value}))}
+                    />
+                </InputGroup>
+                <InputGroup className="mb-4">
+                    <DropdownButton title='' onSelect={handleSelectTheme}>
+                        {themeList && themeList.map((theme, index) => (
+                            <Dropdown.Item key={index} eventKey={theme.name}>{theme.name}</Dropdown.Item>
                         ))}
-                    </datalist>
-                </div>
-            </div>
-            <div className="row justify-content-center">
-                <button type="button" className="btn btn-primary">
-                    Save
-                </button>
+                    </DropdownButton>
+                    <Form.Control placeholder="Select or write a new theme name" aria-label="Theme"
+                                  aria-describedby="theme-addon" style={{fontSize: '14px'}}
+                                  value={selectedTheme}
+                                  onChange={(e) => setSelectedTheme(e.target.value)}
+                    />
+                </InputGroup>
+                <InputGroup>
+                    <Form.Check
+                        type="switch"
+                        id="is-favorite"
+                        label="Add to favorite"
+                    />
+                </InputGroup>
             </div>
         </div>
     );
