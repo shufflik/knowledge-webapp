@@ -77,7 +77,6 @@ const AddNote = () => {
         description: '',
         id: '',
         link: '',
-        theme_name: '',
         title: ''
     });
 
@@ -108,7 +107,7 @@ const AddNote = () => {
 
         const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
-            && selectedUnSavedNote.theme_name.trim() !== '';
+            && selectedTheme.trim() !== '';
         mainButton("Save note", isCanBeSaved, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
@@ -145,8 +144,7 @@ const AddNote = () => {
             description: note.description,
             id: note.id,
             link: note.link,
-            title: note.title,
-            theme_name: '',
+            title: note.title
         });
         setShow(false);
     };
