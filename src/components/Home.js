@@ -14,14 +14,17 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
-            <h1>Home</h1>
-            <h1>Build: 1.2.1 </h1>
-            <span>User: {tg.initDataUnsafe?.user?.username}</span>
-            <p>Welcome to the note-taking app!</p>
-            <p>Current width: {window.innerWidth}</p>
-            <p>Current height: {window.innerHeight}</p>
-            <button onClick={handleGoToNotes}>Go to notes</button>
+        <div className="container">
+            <div className="row justify-content-center">
+                <h1>Home</h1>
+                <h1>Build: 1.2.1 </h1>
+                <span>User: {tg.initDataUnsafe?.user?.username}</span>
+                <span>Current width: {window.innerWidth}</span>
+                <span>Current height: {window.innerHeight}</span>
+                <div className="row-cols-sm-5 mt-5 justify-content-center">
+                    <button type="button" className="btn btn-success rounded-pill" onClick={handleGoToNotes}>Go to notes</button>
+                </div>
+            </div>
         </div>
     );
 };
