@@ -79,9 +79,9 @@ const Notes = () => {
     // backButton(false, null)
   }, [navigate]);
 
-  useEffect(() => {
-    backButton(false, null)
-  }, []);
+  // useEffect(() => {
+  //   backButton(false, null)
+  // }, []);
 
   return (
       <div className="container mt-5">

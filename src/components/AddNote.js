@@ -88,11 +88,11 @@ const AddNote = () => {
         });
     }, [inputValue]);
 
-    useEffect(() => {
-        backButton(true, () => {
-            navigate('/')
-        })
-    }, [navigate]);
+    // useEffect(() => {
+    //     backButton(true, () => {
+    //         navigate('/')
+    //     })
+    // }, [navigate]);
 
     useEffect(() => {
         // Показать модальное окно только при первом монтировании компонента
