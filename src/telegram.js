@@ -30,13 +30,10 @@ export const closeTelegram = () => {
 export const mainButton = (buttonText, isEnabled, callback) => {
   tg.MainButton.color = "#2cab37"
   tg.MainButton.textColor = "#FFFFFF";
-  tg.MainButton.setText(buttonText);
 
-  // if (tg.MainButton.isVisible) {
-  //   tg.MainButton.hide();
-  // } else {
-  //   tg.MainButton.show();
-  // }
+  if (buttonText !== '' || buttonText !== null) {
+    tg.MainButton.setText(buttonText);
+  }
 
   if (isEnabled) {
     tg.MainButton.show();
@@ -46,7 +43,9 @@ export const mainButton = (buttonText, isEnabled, callback) => {
     tg.MainButton.disable();
   }
 
-  tg.MainButton.onClick(callback);
+  if (callback !== null) {
+      tg.MainButton.onClick(callback);
+  }
 };
 
 export const backButton = (isEnabled, callback) => {
@@ -55,7 +54,7 @@ export const backButton = (isEnabled, callback) => {
   } else {
     tg.BackButton.hide();
   }
-  if (callback != null) {
+  if (callback !== null) {
     tg.BackButton.onClick(callback);
   }
 };

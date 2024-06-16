@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import NoteNotSavedCard from "./NoteNotSavedCard";
@@ -56,6 +56,7 @@ const AddNote = () => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const inputRef = useRef(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -81,7 +82,6 @@ const AddNote = () => {
         setNotSavedNotes(notSavedNotesTest);
 
         const isEnabled = inputValue.trim() !== '';
-
         mainButton("Save note", isEnabled, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
@@ -94,6 +94,18 @@ const AddNote = () => {
     useEffect(() => {
         // Показать модальное окно только при первом монтировании компонента
         setShowModal(true);
+    }, []);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (inputRef.current && !inputRef.current.contains(event.target)) {
+                inputRef.current.blur();
+            }
+        };
+        document.addEventListener('click', handleClickOutside, true);
+        return () => {
+            document.removeEventListener('click', handleClickOutside, true);
+        };
     }, []);
 
     const handleClose = () => setShowModal(false);
@@ -149,7 +161,7 @@ const AddNote = () => {
                 <div className="mb-3" style={{maxWidth: '400px', width: '100%'}}>
                     <label htmlFor="exampleDataList" className="form-label">Datalist example</label>
                     <input className="form-control" list="datalistOptions" id="exampleDataList"
-                           placeholder="Type to search..." value={inputValue} onChange={handleInputChange}/>
+                           placeholder="Type to search..." value={inputValue} onChange={handleInputChange} ref={inputRef}/>
                     <datalist id="datalistOptions">
                         {listOfNames.map((option, index) => (
                             <option key={index} value={option}/>
