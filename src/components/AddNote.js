@@ -73,7 +73,13 @@ const AddNote = () => {
     const [show, setShow] = useState(false);
     // const [inputValue, setInputValue] = useState('');
     const [selectedTheme, setSelectedTheme] = useState('');
-    const [selectedUnSavedNote, setSelectedUnSavedNote] = useState({ id: '', title: '', description: '', link: '' });
+    const [selectedUnSavedNote, setSelectedUnSavedNote] = useState({
+        description: '',
+        id: '',
+        link: '',
+        theme_name: '',
+        title: ''
+    });
 
     const inputRef = useRef(null);
     const navigate = useNavigate();
@@ -100,9 +106,10 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
 
-        const isEnabled = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
-            && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== '';
-        mainButton("Save note", isEnabled, () => {
+        const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+            && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
+            && selectedUnSavedNote.theme_name.trim() !== '';
+        mainButton("Save note", isCanBeSaved, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });
@@ -179,7 +186,9 @@ const AddNote = () => {
                         aria-label="Title"
                         aria-describedby="title-addon"
                         value={selectedUnSavedNote.title}
-                        onChange={(e) => setSelectedUnSavedNote(prevState => ({ ...prevState, title: e.target.value}))}
+                        onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            return ({...prevState, title: e.target.value});
+                        })}
                     />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -188,7 +197,9 @@ const AddNote = () => {
                         aria-label="Description"
                         aria-describedby="description-addon"
                         value={selectedUnSavedNote.description}
-                        onChange={(e) => setSelectedUnSavedNote(prevState => ({ ...prevState, description: e.target.value}))}
+                        onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            return ({...prevState, description: e.target.value});
+                        })}
                     />
                 </InputGroup>
                 <InputGroup className="mb-3">
@@ -198,7 +209,9 @@ const AddNote = () => {
                         aria-label="Link"
                         aria-describedby="url-addon"
                         value={selectedUnSavedNote.link}
-                        onChange={(e) => setSelectedUnSavedNote(prevState => ({ ...prevState, link: e.target.value}))}
+                        onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            return ({...prevState, link: e.target.value});
+                        })}
                     />
                 </InputGroup>
                 <InputGroup className="mb-4">
