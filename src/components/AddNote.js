@@ -129,7 +129,8 @@ const AddNote = () => {
             <Button variant="primary" onClick={handleOffcanvasShow} className="me-2">
                 Unsaved notes
             </Button>
-            <Offcanvas show={show} onHide={handleOffcanvasClose} placement="bottom" style={{height: '70%'}}>
+            <Offcanvas show={show} onHide={handleOffcanvasClose} placement="bottom"
+                       style={{height: '70%', color: '#e8e8e8', backgroundColor: '#262626'}}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>Not saved notes</Offcanvas.Title>
                 </Offcanvas.Header>
@@ -138,9 +139,9 @@ const AddNote = () => {
                         {notSavedNote && notSavedNote.map((note, index) => (
                             <div key={index} className="row mb-3">
                                 <div className="note-card col d-flex justify-content-center align-items-center">
-                                    <button type="button" className="btn btn-outline-primary d-flex justify-content-center align-items-center"
+                                    <button type="button" className="btn btn-primary d-flex justify-content-center align-items-center"
                                             style={{width: '100%', height: '50px'}}>
-                                        <Textfit mode="single" max={15} style={{width: '100%', textAlign: 'center', color: '#262626'}}>
+                                        <Textfit mode="single" max={15} style={{width: '100%', textAlign: 'center'}}>
                                             {note.title}
                                         </Textfit>
                                     </button>
