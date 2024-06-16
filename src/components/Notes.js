@@ -76,8 +76,12 @@ const Notes = () => {
       console.log("Button in Component A clicked");
       navigate('/add')
     });
-    backButton(false, null)
+    // backButton(false, null)
   }, [navigate]);
+
+  useEffect(() => {
+    backButton(false, null)
+  }, []);
 
   return (
       <div className="container mt-5">

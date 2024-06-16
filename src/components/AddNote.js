@@ -86,10 +86,13 @@ const AddNote = () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });
+    }, [inputValue]);
+
+    useEffect(() => {
         backButton(true, () => {
             navigate('/')
         })
-    }, [inputValue, navigate]);
+    }, [navigate]);
 
     useEffect(() => {
         // Показать модальное окно только при первом монтировании компонента
