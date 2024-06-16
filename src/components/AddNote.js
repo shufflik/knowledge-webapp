@@ -91,11 +91,12 @@ const AddNote = () => {
         })
     }, [inputValue, navigate]);
 
+    // Показ модального окна только при первом монтировании компонента
     useEffect(() => {
-        // Показать модальное окно только при первом монтировании компонента
         setShowModal(true);
     }, []);
 
+    // Обработка скрытия клавиатура
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (inputRef.current && !inputRef.current.contains(event.target)) {

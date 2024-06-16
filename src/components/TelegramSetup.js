@@ -7,6 +7,9 @@ const TelegramSetup = () => {
 
     useEffect(() => {
         initTelegram();
+    }, []);
+
+    useEffect(() => {
         settingsButton(() => {
             navigate('/home');
         });
