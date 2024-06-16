@@ -1,22 +1,19 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Navbar from './components/Navbar';
 import Home from './components/Home';
 import Notes from './components/Notes';
 import AddNote from './components/AddNote';
 import EditNote from './components/EditNote';
-import {initTelegram} from './telegram';
+import TelegramSetup from './components/TelegramSetup';
 import './App.css';
+// import {Navbar} from "react-bootstrap";
 
 function App() {
-    React.useEffect(() => {
-        initTelegram();
-    }, []);
-
     return (
         <Router basename="/knowledge-webapp">
             <div className="App">
-                <Navbar/>
+                {/*<Navbar/>*/}
+                <TelegramSetup/>
                 <div className="container mt-5 pt-5">
                     <Routes>
                         <Route index path="/" element={<Notes/>}/>

@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './NoteCard.css';
 
 const NoteCard = ({note}) => {
-    const truncatedText = note.title.length > 10 ? note.title.substring(0, 10) + '...' : note.title;
-    const truncatedDescription = note.description.length > 10 ? note.description.substring(0, 10) + '...' : note.description;
+    const truncatedText = note.title.length > 17 ? note.title.substring(0, 17) + '..' : note.title;
+    const truncatedDescription = note.description.length > 25 ? note.description.substring(0, 25) + '..' : note.description;
 
     const handleFavoriteClick = () => {
         console.log(`Added ${note.title} to favorites`);

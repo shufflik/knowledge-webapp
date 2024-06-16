@@ -1,7 +1,14 @@
 import React from 'react';
-import tg, {openBackButton, openSettingsButton} from "../telegram.js";
+import tg from "../telegram.js";
+import {useNavigate} from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const handleGoToNotes = () => {
+    navigate('/');
+  };
+
   return (
       <div>
           <h1>Home</h1>
@@ -10,9 +17,7 @@ const Home = () => {
           <p>Welcome to the note-taking app!</p>
           <p>Current width: {window.innerWidth}</p>
           <p>Current height: {window.innerHeight}</p>
-          {/*<button onClick={openMainButton}>Main button</button>*/}
-          <button onClick={openSettingsButton}>Settings button</button>
-          <button onClick={openBackButton}>Back button</button>
+          <button onClick={handleGoToNotes}>Go to notes</button>
       </div>
   );
 };

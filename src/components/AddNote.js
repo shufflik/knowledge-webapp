@@ -2,7 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import NoteNotSavedCard from "./NoteNotSavedCard";
-import {openMainButton} from "../telegram";
+import {backButton, mainButton} from "../telegram";
+import {useNavigate} from "react-router-dom";
 
 const notSavedNotesTest = [
   {
@@ -55,6 +56,7 @@ const AddNote = () => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
@@ -79,13 +81,15 @@ const AddNote = () => {
         setNotSavedNotes(notSavedNotesTest);
 
         const isEnabled = inputValue.trim() !== '';
-        const textButtonColor = inputValue.trim() !== '' ? "#2cab37" : "#FAFAFA00"
 
-        openMainButton("Save note", isEnabled, textButtonColor, () => {
+        mainButton("Save note", isEnabled, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });
-    }, [inputValue]);
+        backButton(true, () => {
+            navigate('/')
+        })
+    }, [inputValue, navigate]);
 
     useEffect(() => {
         // Показать модальное окно только при первом монтировании компонента
@@ -118,18 +122,18 @@ const AddNote = () => {
                                 {/*    <span aria-hidden="true">&times;</span>*/}
                                 {/*</button>*/}
                             </div>
-                            <div className="modal-body">
-                                <div className="container">
-                                    <div className="row">
+                            {/*<div className="modal-body">*/}
+                                <div className="container mt-4">
+                                    <div className="row justify-content-center">
                                         {notSavedNote.map((note, index) => (
                                             <div key={index}
-                                                 className="col-4 col-sm-4 col-md-4 mb-4 d-flex align-items-stretch">
+                                                 className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch">
                                                 <NoteNotSavedCard note={note}/>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
-                            </div>
+                            {/*</div>*/}
                             <div className="modal-footer justify-content-center">
                                 <button type="button" className="btn btn-secondary" onClick={handleClose}>
                                     Close

@@ -5,6 +5,7 @@ export const initTelegram = () => {
   if (isTelegramWebApp) {
     tg.ready();
     tg.expand();
+    tg.SettingsButton.show();
   } else {
     console.log('Telegram WebApp is not defined. Running in local mode.');
   }
@@ -26,8 +27,8 @@ export const closeTelegram = () => {
   }
 };
 
-export const openMainButton = (buttonText, isEnabled, color, callback) => {
-  tg.MainButton.color = color != null ? color : "#2cab37"
+export const mainButton = (buttonText, isEnabled, callback) => {
+  tg.MainButton.color = "#2cab37"
   tg.MainButton.textColor = "#FFFFFF";
   tg.MainButton.setText(buttonText);
 
@@ -38,36 +39,34 @@ export const openMainButton = (buttonText, isEnabled, color, callback) => {
   // }
 
   if (isEnabled) {
+    tg.MainButton.show();
     tg.MainButton.enable();
   } else {
+    tg.MainButton.hide();
     tg.MainButton.disable();
   }
-
-  tg.MainButton.show();
 
   tg.MainButton.onClick(callback);
 };
 
-export const openSettingsButton = () => {
-  if (tg.SettingsButton.isVisible) {
-    tg.SettingsButton.hide();
+export const backButton = (isEnabled, callback) => {
+  if (isEnabled) {
+    tg.BackButton.show();
   } else {
-    tg.SettingsButton.show();
+    tg.BackButton.hide();
+  }
+  if (callback != null) {
+    tg.BackButton.onClick(callback);
   }
 };
 
-export const openBackButton = () => {
-    // tg.BackButton.setText("Notes")
-  if (tg.BackButton.isVisible) {
-    tg.BackButton.hide();
-  } else {
-    tg.BackButton.show();
-  }
+export const settingsButton = (callback) => {
+  tg.SettingsButton.onClick(callback);
 };
 
 // eslint-disable-next-line no-undef
-Telegram.WebApp.onEvent("mainButtonClicked", function () {
-
-})
+// Telegram.WebApp.onEvent("settingsButtonClicked", function () {
+//
+// })
 
 export default tg;
