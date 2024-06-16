@@ -141,7 +141,13 @@ const AddNote = () => {
         setSelectedTheme(eventKey);
     };
     const handleUnSavedNoteClick = (note) => {
-        setSelectedUnSavedNote({id: note.id, title: note.title, description: note.description, link: note.link});
+        setSelectedUnSavedNote({
+            description: note.description,
+            id: note.id,
+            link: note.link,
+            title: note.title,
+            theme_name: '',
+        });
         setShow(false);
     };
 
