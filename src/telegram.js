@@ -27,13 +27,13 @@ export const closeTelegram = () => {
   }
 };
 
-export const mainButton = (buttonText, isEnabled, callback) => {
+export const mainButton = (buttonText, isEnabled, color, callback) => {
   if (buttonText) {
     tg.MainButton.setText(buttonText);
   }
 
   if (isEnabled) {
-    tg.MainButton.color = "#2cab37"
+    tg.MainButton.color = color ? color : "#2cab37"
     tg.MainButton.textColor = "#FFFFFF";
     tg.MainButton.show();
   } else {

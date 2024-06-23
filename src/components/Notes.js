@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 // import axios from 'axios';
 import "./Notes.css";
 import NoteCard from './NoteCard';
@@ -64,17 +64,6 @@ const Notes = () => {
     const [showFullInfo, setShowFullInfo] = useState(false);
     const navigate = useNavigate();
 
-    const isEnableTelegramMainButton = useCallback((isEnable) => {
-        if (isEnable) {
-            mainButton("Create note", true, () => {
-                console.log("Button in Component A clicked");
-                navigate('/add');
-            });
-        } else {
-            mainButton(null, false, null);
-        }
-    }, [navigate]);
-
     useEffect(() => {
         // console.info('Fetching notes..');
         // const fetchNotes = async () => {
@@ -92,26 +81,44 @@ const Notes = () => {
         // fetchNotes();
         setNotes(notesTest)
 
-        isEnableTelegramMainButton(true)
+        mainButton("Create note", true, null, () => {
+            console.log("Button in Component A clicked");
+            navigate('/add');
+        });
         backButton(false, null)
-    }, [navigate, isEnableTelegramMainButton]);
+    }, [navigate]);
+
+
+    useEffect(() => {
+        if (showFullInfo && currentNote) {
+            // Если информация о заметке показана и текущая заметка обновлена, устанавливаем кнопку "Edit"
+            mainButton("Edit", true, "#ffea40", () => {
+                console.log("Button in Component A clicked");
+                navigate('/add', {state: {note: currentNote}});
+            });
+        } else {
+            // В противном случае возвращаем кнопку "Create note"
+            mainButton("Create note", true, null, () => {
+                console.log("Button in Component A clicked");
+                navigate('/add');
+            });
+        }
+    }, [showFullInfo, currentNote, navigate]);
 
     const handleFullInfoClose = () => {
         setShowFullInfo(false);
-        isEnableTelegramMainButton(true)
         setTimeout(() => {
             setCurrentNote(null);
         }, 300);
     }
     const handleFullInfoShow = (note) => {
         setCurrentNote(note);
-        isEnableTelegramMainButton(false)
         setShowFullInfo(true);
     }
 
-    const handleChangeNote = () => {
-        navigate('/add', {state: {note: currentNote}});
-    };
+    // const handleChangeNote = () => {
+    //     navigate('/add', {state: {note: currentNote}});
+    // };
 
     return (
         <div className="container mt-5">
@@ -181,7 +188,7 @@ const Notes = () => {
                         </Form.Group>
                     </Form>
                 </Offcanvas.Body>
-                <Button onClick={handleChangeNote}> Change note </Button>
+                {/*<Button onClick={handleChangeNote}> Change note </Button>*/}
             </Offcanvas>
         </div>
     );

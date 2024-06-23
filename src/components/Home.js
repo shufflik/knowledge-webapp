@@ -10,7 +10,7 @@ const Home = () => {
     };
 
     useEffect(() => {
-        mainButton(null, false, null);
+        mainButton(null, false, null, null);
     }, []);
 
     return (
