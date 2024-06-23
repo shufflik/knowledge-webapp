@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 // import axios from 'axios';
 import "./Notes.css";
 import NoteCard from './NoteCard';
 import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
+import {Button, Col, Form, Image, Offcanvas, Row} from "react-bootstrap";
+import TextareaAutosize from "react-textarea-autosize";
 
 const notesTest = [
     {
@@ -58,7 +60,20 @@ const notesTest = [
 
 const Notes = () => {
     const [notes, setNotes] = useState([]);
+    const [currentNote, setCurrentNote] = useState(null);
+    const [showFullInfo, setShowFullInfo] = useState(false);
     const navigate = useNavigate();
+
+    const isEnableTelegramMainButton = useCallback((isEnable) => {
+        if (isEnable) {
+            mainButton("Create note", true, () => {
+                console.log("Button in Component A clicked");
+                navigate('/add');
+            });
+        } else {
+            mainButton(null, false, null);
+        }
+    }, [navigate]);
 
     useEffect(() => {
         // console.info('Fetching notes..');
@@ -77,26 +92,97 @@ const Notes = () => {
         // fetchNotes();
         setNotes(notesTest)
 
-        mainButton("Create note", true, () => {
-            console.log("Button in Component A clicked");
-            navigate('/add')
-        });
+        isEnableTelegramMainButton(true)
         backButton(false, null)
-    }, [navigate]);
+    }, [navigate, isEnableTelegramMainButton]);
 
-    // useEffect(() => {
-    //   backButton(false, null)
-    // }, []);
+    const handleFullInfoClose = () => {
+        setShowFullInfo(false);
+        isEnableTelegramMainButton(true)
+        setTimeout(() => {
+            setCurrentNote(null);
+        }, 300);
+    }
+    const handleFullInfoShow = (note) => {
+        setCurrentNote(note);
+        isEnableTelegramMainButton(false)
+        setShowFullInfo(true);
+    }
+
+    const handleChangeNote = () => {
+        navigate('/add', {state: {note: currentNote}});
+    };
 
     return (
         <div className="container mt-5">
             <div className="row justify-content-center">
                 {notes.map((note, index) => (
-                    <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch">
+                    <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch"
+                         onClick={() => handleFullInfoShow(note)}>
                         <NoteCard note={note}/>
                     </div>
                 ))}
             </div>
+            <Offcanvas show={showFullInfo} onHide={handleFullInfoClose} placement="top"
+                       style={{height: "100%", color: '#e8e8e8', backgroundColor: '#262626'}}>
+                <Offcanvas.Header closeButton className="custom-offcanvas-header">
+                    <div className="row justify-content-center">
+                        <div className="image-container">
+                            <Image src={`${process.env.PUBLIC_URL}/note-logo.png`} className="card-img-top"
+                                   style={{width: 'auto', height: '100%'}}/>
+                        </div>
+                    </div>
+                </Offcanvas.Header>
+                <Offcanvas.Body className="custom-offcanvas-body">
+                    <Form>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextTitle">
+                            <Form.Label className="custom-label" column sm="2">
+                                Title
+                            </Form.Label>
+                            <Col sm="10">
+                                <TextareaAutosize
+                                    readOnly
+                                    className="form-control-plaintext custom-textarea"
+                                    value={currentNote ? currentNote.title : ''}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+                            <Form.Label className="custom-label" column sm="2">
+                                Description
+                            </Form.Label>
+                            <Col sm="10">
+                                <TextareaAutosize
+                                    readOnly
+                                    className="form-control-plaintext custom-textarea"
+                                    value={currentNote ? currentNote.description : ''}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextLink">
+                            <Form.Label className="custom-label" column sm="2">
+                                Link
+                            </Form.Label>
+                            <Col sm="2" className="d-flex justify-content-center">
+                                <Button href={currentNote ? currentNote.link : ''}> Open </Button>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextTheme">
+                            <Form.Label className="custom-label" column sm="2">
+                                Theme
+                            </Form.Label>
+                            <Col sm="10">
+                                <TextareaAutosize
+                                    readOnly
+                                    className="form-control-plaintext custom-textarea"
+                                    value={currentNote ? currentNote.theme_name : ''}
+                                />
+                            </Col>
+                        </Form.Group>
+                    </Form>
+                </Offcanvas.Body>
+                <Button onClick={handleChangeNote}> Change note </Button>
+            </Offcanvas>
         </div>
     );
 };

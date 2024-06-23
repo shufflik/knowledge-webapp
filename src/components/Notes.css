@@ -1,0 +1,61 @@
+.custom-textarea {
+    color: white !important;
+    white-space: pre-wrap;
+    border: none;
+    resize: none;
+    box-shadow: none;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+.custom-label {
+    /*font-family: 'Rubik', sans-serif;*/
+    /*font-size: 100px;*/
+    font-weight: bold;
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;  /* Установите нужный размер контейнера */
+    height: 100px; /* Установите нужный размер контейнера */
+    margin: 0 auto;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 235, 59, 1)); /* Желтое свечение вокруг изображения */
+}
+
+.custom-offcanvas-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.custom-offcanvas-header .btn-close {
+    background-size: 10px;
+    background-color: #a4a4a4;
+    border-radius: 20px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.custom-offcanvas-body {
+    background-color: #333331;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    box-shadow: 0 0 20px rgb(65, 65, 63); /* Желтое свечение */
+    padding-top: 20px; /* Дополнительное пространство сверху */
+}
