@@ -52,7 +52,7 @@ const NoteCard = ({note}) => {
                 <Offcanvas.Header closeButton className="custom-offcanvas-header">
                     <div className="row justify-content-center">
                         <div className="image-container">
-                            <Image src={`${process.env.PUBLIC_URL}/note_logo.png`} className="card-img-top"
+                            <Image src={`${process.env.PUBLIC_URL}/note-logo.png`} className="card-img-top"
                                    style={{width: 'auto', height: '100%'}}/>
                         </div>
                     </div>
