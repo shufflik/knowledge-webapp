@@ -110,10 +110,14 @@ const Notes = () => {
         setTimeout(() => {
             setCurrentNote(null);
         }, 300);
+        backButton(false, null)
     }
     const handleFullInfoShow = (note) => {
         setCurrentNote(note);
         setShowFullInfo(true);
+        backButton(true, () => {
+            navigate('/')
+        })
     }
 
     // const handleChangeNote = () => {

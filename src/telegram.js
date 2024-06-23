@@ -33,7 +33,7 @@ export const mainButton = (buttonText, isEnabled, color, callback) => {
   }
 
   if (isEnabled) {
-    tg.MainButton.color = color != null ? color : "#2cab37"
+    tg.MainButton.color = color !== null ? color : "#2cab37"
     tg.MainButton.textColor = "#FFFFFF";
     tg.MainButton.show();
   } else {
