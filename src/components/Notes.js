@@ -109,8 +109,8 @@ const Notes = () => {
         setShowFullInfo(false);
         setTimeout(() => {
             setCurrentNote(null);
+            backButton(false, null)
         }, 300);
-        backButton(false, null)
     }
     const handleFullInfoShow = (note) => {
         setCurrentNote(note);
