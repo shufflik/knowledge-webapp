@@ -111,7 +111,7 @@ const AddNote = () => {
         const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
             && selectedTheme.trim() !== '';
-        mainButton("Save note", isCanBeSaved, null, () => {
+        mainButton("Save note", isCanBeSaved, "#2cab37", () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });
