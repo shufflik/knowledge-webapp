@@ -92,7 +92,7 @@ const Notes = () => {
     useEffect(() => {
         if (showFullInfo && currentNote) {
             // Если информация о заметке показана и текущая заметка обновлена, устанавливаем кнопку "Edit"
-            mainButton("Edit", true, "rgba(199,139,38,0.84)", () => {
+            mainButton("Edit", true, "#dea635", () => {
                 console.log("Button in Component A clicked");
                 navigate('/add', {state: {note: currentNote}});
             });
