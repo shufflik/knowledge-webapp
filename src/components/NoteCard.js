@@ -1,37 +1,112 @@
-import React from 'react';
-import { Card } from 'react-bootstrap';
+import React, {useState} from 'react';
+import {Button, Card, Col, Form, Image, Offcanvas, Row} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './NoteCard.css';
+import TextareaAutosize from "react-textarea-autosize";
+import {useNavigate} from "react-router-dom";
 
 const NoteCard = ({note}) => {
     const truncatedText = note.title.length > 17 ? note.title.substring(0, 17) + '..' : note.title;
     const truncatedDescription = note.description.length > 25 ? note.description.substring(0, 25) + '..' : note.description;
 
+    const [showFullInfo, setShowFullInfo] = useState(false);
+    const [currentNote, setCurrentNote] = useState(null);
+    const navigate = useNavigate();
+
     const handleFavoriteClick = () => {
         console.log(`Added ${note.title} to favorites`);
     };
 
+    const handleFullInfoClose = () => {
+        setShowFullInfo(false);
+        setTimeout(() => {
+            setCurrentNote(null);
+        }, 300);
+    }
+    const handleFullInfoShow = (note) => {
+        setCurrentNote(note);
+        setShowFullInfo(true);
+    }
+
+    const handleChangeNote = () => {
+        navigate('/add', {state: {note: currentNote}});
+    };
+
     return (
         <Card className="mb-3 card-size">
-            <Card.Body className="d-flex flex-column">
+            <Card.Body className="d-flex flex-column" onClick={() => handleFullInfoShow(note)}>
                 <div className="d-flex justify-content-end mb-2 favorite-icon-container">
                     <div className="badge">
                         <span>{note.theme_name}</span>
                     </div>
                     <div className="favorite-icon" onClick={handleFavoriteClick}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                             fill="currentColor" className="bi bi-star" viewBox="0 0 16 16">
-                            <path
-                                d="M2.866 14.85c-.078.444.36.791.746.593l3.39-1.797a.5.5 0 0 1 .475 0l3.39 1.797c.386.198.824-.149.746-.592l-.65-3.75a.5.5 0 0 1 .145-.474l2.727-2.654c.329-.32.158-.888-.283-.95l-3.768-.548a.5.5 0 0 1-.375-.272L8 2.223 6.651 5.206a.5.5 0 0 1-.375.272l-3.768.548c-.441.062-.612.63-.282.95l2.727 2.654a.5.5 0 0 1 .145.474l-.65 3.75zm4.905-2.767a1 1 0 0 0-.925 0l-3.39 1.797a.5.5 0 0 1-.746-.593l.65-3.75a1 1 0 0 0-.291-.948L.44 6.478a.5.5 0 0 1 .283-.95l3.768-.548a1 1 0 0 0 .754-.55L8 1.223l1.755 3.507a1 1 0 0 0 .754.55l3.768.548a.5.5 0 0 1 .283.95l-2.727 2.654a1 1 0 0 0-.291.948l.65 3.75a.5.5 0 0 1-.746.593l-3.39-1.797z"/>
-                        </svg>
+                        <Image src={`${process.env.PUBLIC_URL}/${note.is_favorite ? 'star-enable.png' : 'star-disable.png'}`}
+                                   style={{width: '19px', height: '19px'}}/>
                     </div>
                 </div>
                 <Card.Title>{truncatedText}</Card.Title>
                 <Card.Text>{truncatedDescription}</Card.Text>
             </Card.Body>
-            {/*<Card.Footer>*/}
-            {/*    <small className="text-muted">#hello</small>*/}
-            {/*</Card.Footer>*/}
+            <Offcanvas show={showFullInfo} onHide={handleFullInfoClose} placement="start"
+                       style={{width: "100%", color: '#e8e8e8', backgroundColor: '#262626'}}>
+                <Offcanvas.Header closeButton className="custom-offcanvas-header">
+                    <div className="row justify-content-center">
+                        <div className="image-container">
+                            <Image src={`${process.env.PUBLIC_URL}/note_logo.png`} className="card-img-top"
+                                   style={{width: 'auto', height: '100%'}}/>
+                        </div>
+                    </div>
+                </Offcanvas.Header>
+                <Offcanvas.Body className="custom-offcanvas-body">
+                    <Form>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextTitle">
+                            <Form.Label className="custom-label" column sm="2">
+                                Title
+                            </Form.Label>
+                            <Col sm="10">
+                                <TextareaAutosize
+                                    readOnly
+                                    className="form-control-plaintext custom-textarea"
+                                    value={currentNote ? currentNote.title : ''}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+                            <Form.Label className="custom-label" column sm="2">
+                                Description
+                            </Form.Label>
+                            <Col sm="10">
+                                <TextareaAutosize
+                                    readOnly
+                                    className="form-control-plaintext custom-textarea"
+                                    value={currentNote ? currentNote.description : ''}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextLink">
+                            <Form.Label className="custom-label" column sm="2">
+                                Link
+                            </Form.Label>
+                            <Col sm="2" className="d-flex justify-content-center">
+                                <Button href={currentNote ? currentNote.link : ''}> Open </Button>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="mb-3" controlId="formPlaintextTheme">
+                            <Form.Label className="custom-label" column sm="2">
+                                Theme
+                            </Form.Label>
+                            <Col sm="10">
+                                <TextareaAutosize
+                                    readOnly
+                                    className="form-control-plaintext custom-textarea"
+                                    value={currentNote ? currentNote.theme_name : ''}
+                                />
+                            </Col>
+                        </Form.Group>
+                    </Form>
+                </Offcanvas.Body>
+                <Button onClick={handleChangeNote}> Change note </Button>
+            </Offcanvas>
         </Card>
     );
 };

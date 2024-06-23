@@ -6,13 +6,11 @@ import AddNote from './components/AddNote';
 import EditNote from './components/EditNote';
 import TelegramSetup from './components/TelegramSetup';
 import './App.css';
-// import {Navbar} from "react-bootstrap";
 
 function App() {
     return (
         <Router basename="/knowledge-webapp">
             <div className="App">
-                {/*<Navbar/>*/}
                 <TelegramSetup/>
                 <div className="container mt-5 pt-5">
                     <Routes>

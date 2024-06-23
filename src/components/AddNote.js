@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import {backButton, mainButton} from "../telegram";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {Button, DropdownButton, InputGroup, Dropdown, Offcanvas, Form} from "react-bootstrap";
 import {Textfit} from "react-textfit";
 
@@ -71,15 +71,18 @@ const notSavedNotesTest = [
 const AddNote = () => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [show, setShow] = useState(false);
-    // const [inputValue, setInputValue] = useState('');
+    const [isFavorite, setIsFavorite] = useState(false);
     const [selectedTheme, setSelectedTheme] = useState('');
     const [selectedUnSavedNote, setSelectedUnSavedNote] = useState({
         description: '',
         id: '',
         link: '',
-        title: ''
+        title: '',
+        theme_name: '',
+        is_favorite: false
     });
 
+    const location = useLocation();
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
@@ -130,6 +133,14 @@ const AddNote = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (location.state && location.state.note) {
+            setSelectedUnSavedNote(location.state.note);
+            setSelectedTheme(location.state.note.theme_name);
+            setIsFavorite(location.state.note.is_favorite);
+        }
+    }, [location.state]);
+
     const handleOffcanvasClose = () => {
         setShow(false);
     }
@@ -139,13 +150,23 @@ const AddNote = () => {
     const handleSelectTheme = (eventKey) => {
         setSelectedTheme(eventKey);
     };
+    const handleFavoriteChange = () => {
+        setIsFavorite(!isFavorite);
+        setSelectedUnSavedNote(prevState => ({
+            ...prevState,
+            is_favorite: !isFavorite
+        }));
+    };
     const handleUnSavedNoteClick = (note) => {
         setSelectedUnSavedNote({
-            description: note.description,
-            id: note.id,
-            link: note.link,
-            title: note.title
+            description: note.description || '',
+            id: note.id || '',
+            link: note.link || '',
+            title: note.title || '',
+            theme_name: note.theme_name || '',
+            is_favorite: false
         });
+        setIsFavorite(false);
         setShow(false);
     };
 
@@ -235,6 +256,8 @@ const AddNote = () => {
                         type="switch"
                         id="is-favorite"
                         label="Add to favorite"
+                        checked={isFavorite}
+                        onChange={handleFavoriteChange}
                     />
                 </InputGroup>
             </div>
