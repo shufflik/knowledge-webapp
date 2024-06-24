@@ -109,15 +109,11 @@ const Notes = () => {
         setShowFullInfo(false);
         setTimeout(() => {
             setCurrentNote(null);
-            backButton(false, null)
         }, 300);
     }
     const handleFullInfoShow = (note) => {
         setCurrentNote(note);
         setShowFullInfo(true);
-        backButton(true, () => {
-            navigate('/')
-        })
     }
 
     // const handleChangeNote = () => {

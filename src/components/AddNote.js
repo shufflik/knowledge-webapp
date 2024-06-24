@@ -111,10 +111,7 @@ const AddNote = () => {
         const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
             && selectedTheme.trim() !== '';
-        mainButton("Save note", isCanBeSaved, "#2cab37", () => {
-            console.log("Button in Component A clicked");
-            // Ваша логика для Component A
-        });
+        updateMainButton(isCanBeSaved)
         backButton(true, () => {
             navigate('/')
         })
@@ -139,7 +136,17 @@ const AddNote = () => {
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
         }
+
+        // Обновляем кнопку mainButton при монтировании компонента
+        updateMainButton(true);
     }, [location.state]);
+
+    const updateMainButton = (isCanBeSaved) => {
+        mainButton("Save note", isCanBeSaved, "#2cab37", () => {
+            console.log("Button in Component A clicked");
+            // Ваша логика для Component A
+        });
+    };
 
     const handleOffcanvasClose = () => {
         setShow(false);
