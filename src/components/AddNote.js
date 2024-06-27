@@ -126,7 +126,7 @@ const AddNote = () => {
             // updateMainButton(true);
         }
 
-        const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+        let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
             && selectedTheme.trim() !== '';
         updateMainButton(isCanBeSaved)
@@ -149,7 +149,7 @@ const AddNote = () => {
     }, []);
 
     const updateMainButton = (isCanBeSaved) => {
-        mainButton("Save note", isCanBeSaved, "#2cab37", () => {
+        mainButton("Save note", isCanBeSaved, null, () => {
             console.log("Button in Component A clicked");
             // Ваша логика для Component A
         });
