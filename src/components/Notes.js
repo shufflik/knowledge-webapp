@@ -4,7 +4,7 @@ import "./Notes.css";
 import NoteCard from './NoteCard';
 import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
-import {Button, Col, Form, Image, Offcanvas, Row} from "react-bootstrap";
+import {Button, Col, Form, Offcanvas, Row} from "react-bootstrap";
 import TextareaAutosize from "react-textarea-autosize";
 
 const notesTest = [
