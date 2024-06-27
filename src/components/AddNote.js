@@ -125,7 +125,12 @@ const AddNote = () => {
                 && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
                 && selectedTheme.trim() !== '';
             if (!isCanBeSaved) {
-                showAlertPopup("Required fields are empty!")
+                showAlertPopup("Required fields are empty! "
+                    + "\nId: " + selectedUnSavedNote.id
+                    + "\ntitle: " + selectedUnSavedNote.title
+                    + "\ndesc: " + selectedUnSavedNote.description
+                    + "\nlink: " + selectedUnSavedNote.link
+                    + "\ntheme: " + selectedTheme)
             }
             // Ваша логика для Component A
         })
