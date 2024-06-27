@@ -100,7 +100,7 @@ const Notes = () => {
             // В противном случае возвращаем кнопку "Create note"
             mainButton("Create note", true, null, () => {
                 console.log("Button in Component A clicked");
-                navigate('/add');
+                navigate('/add', {state: null});
             });
         }
     }, [showFullInfo, currentNote, navigate]);

@@ -86,6 +86,17 @@ const AddNote = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
+    // useEffect(() => {
+    //     if (location.state && location.state.note) {
+    //         setSelectedUnSavedNote(location.state.note);
+    //         setSelectedTheme(location.state.note.theme_name);
+    //         setIsFavorite(location.state.note.is_favorite);
+    //     }
+    //
+    //     // Обновляем кнопку mainButton при монтировании компонента
+    //     updateMainButton(true);
+    // }, [location.state]);
+
     useEffect(() => {
         // console.info('Fetching not saved notes..');
         // const fetchNotSavedNotes = async () => {
@@ -108,6 +119,13 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
 
+        if (location.state && location.state.note) {
+            setSelectedUnSavedNote(location.state.note);
+            setSelectedTheme(location.state.note.theme_name);
+            setIsFavorite(location.state.note.is_favorite);
+            // updateMainButton(true);
+        }
+
         const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
             && selectedTheme.trim() !== '';
@@ -115,7 +133,7 @@ const AddNote = () => {
         backButton(true, () => {
             navigate('/')
         })
-    }, [selectedUnSavedNote, selectedTheme, navigate]);
+    }, [selectedUnSavedNote, selectedTheme, navigate, location.state]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -129,17 +147,6 @@ const AddNote = () => {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
-
-    useEffect(() => {
-        if (location.state && location.state.note) {
-            setSelectedUnSavedNote(location.state.note);
-            setSelectedTheme(location.state.note.theme_name);
-            setIsFavorite(location.state.note.is_favorite);
-        }
-
-        // Обновляем кнопку mainButton при монтировании компонента
-        updateMainButton(true);
-    }, [location.state]);
 
     const updateMainButton = (isCanBeSaved) => {
         mainButton("Save note", isCanBeSaved, "#2cab37", () => {
