@@ -119,6 +119,12 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
 
+        if (location.state && location.state.note) {
+            setSelectedUnSavedNote(location.state.note);
+            setSelectedTheme(location.state.note.theme_name);
+            setIsFavorite(location.state.note.is_favorite);
+        }
+
         mainButton("Save note", true, null, () => {
             console.log("Button in Component A clicked");
             let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
@@ -135,16 +141,6 @@ const AddNote = () => {
             // Ваша логика для Component A
         })
 
-        if (location.state && location.state.note) {
-            setSelectedUnSavedNote(location.state.note);
-            setSelectedTheme(location.state.note.theme_name);
-            setIsFavorite(location.state.note.is_favorite);
-        }
-
-        // let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
-        //     && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
-        //     && selectedTheme.trim() !== '';
-        // updateMainButton(isCanBeSaved)
         backButton(true, () => {
             navigate('/')
         })

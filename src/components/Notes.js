@@ -88,7 +88,6 @@ const Notes = () => {
         backButton(false, null)
     }, [navigate]);
 
-
     useEffect(() => {
         if (showFullInfo && currentNote) {
             // Если информация о заметке показана и текущая заметка обновлена, устанавливаем кнопку "Edit"
@@ -100,7 +99,7 @@ const Notes = () => {
             // В противном случае возвращаем кнопку "Create note"
             mainButton("Create note", true, null, () => {
                 console.log("Button in Component A clicked");
-                navigate('/add', {state: null});
+                navigate('/add');
             });
         }
     }, [showFullInfo, currentNote, navigate]);
