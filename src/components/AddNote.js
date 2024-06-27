@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
-import {backButton, mainButton} from "../telegram";
+import {backButton, mainButton, showAlertPopup} from "../telegram";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Button, DropdownButton, InputGroup, Dropdown, Offcanvas, Form} from "react-bootstrap";
 import {Textfit} from "react-textfit";
@@ -119,17 +119,27 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
 
+        mainButton("Save note", true, null, () => {
+            console.log("Button in Component A clicked");
+            let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+                && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
+                && selectedTheme.trim() !== '';
+            if (!isCanBeSaved) {
+                showAlertPopup("Required fields are empty!")
+            }
+            // Ваша логика для Component A
+        })
+
         if (location.state && location.state.note) {
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
-            // updateMainButton(true);
         }
 
-        let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
-            && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
-            && selectedTheme.trim() !== '';
-        updateMainButton(isCanBeSaved)
+        // let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+        //     && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
+        //     && selectedTheme.trim() !== '';
+        // updateMainButton(isCanBeSaved)
         backButton(true, () => {
             navigate('/')
         })
@@ -148,12 +158,18 @@ const AddNote = () => {
         };
     }, []);
 
-    const updateMainButton = (isCanBeSaved) => {
-        mainButton("Save note", isCanBeSaved, null, () => {
-            console.log("Button in Component A clicked");
-            // Ваша логика для Component A
-        });
-    };
+    // const showMainButton = () => {
+    //     mainButton("Save note", true, null, () => {
+    //         console.log("Button in Component A clicked");
+    //         let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+    //             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
+    //             && selectedTheme.trim() !== '';
+    //         if (!isCanBeSaved) {
+    //             showAlertPopup("Required fields are empty!")
+    //         }
+    //         // Ваша логика для Component A
+    //     });
+    // };
 
     const handleOffcanvasClose = () => {
         setShow(false);

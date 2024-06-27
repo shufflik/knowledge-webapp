@@ -27,6 +27,14 @@ export const closeTelegram = () => {
   }
 };
 
+export const showAlertPopup = (text) => {
+  if (isTelegramWebApp) {
+    tg.showAlert(text)
+  } else {
+    console.log("Can't show alert message");
+  }
+};
+
 export const mainButton = (buttonText, isEnabled, color, callback) => {
   if (buttonText) {
     tg.MainButton.setText(buttonText);
