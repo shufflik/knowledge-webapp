@@ -1,5 +1,5 @@
 body {
-  background-color: #121212;
+  background-color: var(--tg-theme-bg-color);
   color: #ffffff;
   font-family: Arial, sans-serif;
   margin: 0;

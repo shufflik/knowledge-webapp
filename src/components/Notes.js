@@ -130,15 +130,15 @@ const Notes = () => {
                     </div>
                 ))}
             </div>
-            <Offcanvas show={showFullInfo} onHide={handleFullInfoClose} placement="top"
-                       style={{height: "100%", color: '#e8e8e8', backgroundColor: '#262626'}}>
+            <Offcanvas className="custom-offcanvas" show={showFullInfo} onHide={handleFullInfoClose} placement="bottom"
+                       style={{height: "80%", color: '#e8e8e8', backgroundColor: '#262626'}}>
                 <Offcanvas.Header closeButton className="custom-offcanvas-header">
-                    <div className="row justify-content-center">
-                        <div className="image-container">
-                            <Image src={`${process.env.PUBLIC_URL}/note-logo.png`} className="card-img-top"
-                                   style={{width: 'auto', height: '100%'}}/>
-                        </div>
-                    </div>
+                    {/*<div className="row justify-content-center">*/}
+                    {/*    <div className="image-container">*/}
+                    {/*        <Image src={`${process.env.PUBLIC_URL}/note-logo.png`} className="card-img-top"*/}
+                    {/*               style={{width: 'auto', height: '100%'}}/>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
                 </Offcanvas.Header>
                 <Offcanvas.Body className="custom-offcanvas-body">
                     <Form>
