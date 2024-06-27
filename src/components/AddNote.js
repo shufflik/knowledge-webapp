@@ -86,16 +86,13 @@ const AddNote = () => {
     const inputRef = useRef(null);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     if (location.state && location.state.note) {
-    //         setSelectedUnSavedNote(location.state.note);
-    //         setSelectedTheme(location.state.note.theme_name);
-    //         setIsFavorite(location.state.note.is_favorite);
-    //     }
-    //
-    //     // Обновляем кнопку mainButton при монтировании компонента
-    //     updateMainButton(true);
-    // }, [location.state]);
+    useEffect(() => {
+        if (location.state && location.state.note) {
+            setSelectedUnSavedNote(location.state.note);
+            setSelectedTheme(location.state.note.theme_name);
+            setIsFavorite(location.state.note.is_favorite);
+        }
+    }, [location.state]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
@@ -119,12 +116,6 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
 
-        if (location.state && location.state.note) {
-            setSelectedUnSavedNote(location.state.note);
-            setSelectedTheme(location.state.note.theme_name);
-            setIsFavorite(location.state.note.is_favorite);
-        }
-
         mainButton("Save note", true, null, () => {
             console.log("Button in Component A clicked");
             let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
@@ -144,7 +135,7 @@ const AddNote = () => {
         backButton(true, () => {
             navigate('/')
         })
-    }, [selectedUnSavedNote, selectedTheme, navigate, location.state]);
+    }, [selectedUnSavedNote, selectedTheme, navigate]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
