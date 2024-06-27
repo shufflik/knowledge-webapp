@@ -131,7 +131,7 @@ const Notes = () => {
                 ))}
             </div>
             <Offcanvas className="custom-offcanvas" show={showFullInfo} onHide={handleFullInfoClose} placement="bottom"
-                       style={{height: "80%", color: '#e8e8e8', backgroundColor: '#262626'}}>
+                       style={{height: "80%"}}>
                 <Offcanvas.Header closeButton className="custom-offcanvas-header">
                     {/*<div className="row justify-content-center">*/}
                     {/*    <div className="image-container">*/}
