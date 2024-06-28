@@ -181,11 +181,11 @@ const AddNote = () => {
     };
     const handleUnSavedNoteClick = (note) => {
         setSelectedUnSavedNote({
-            description: note.description || '',
-            id: note.id || '',
-            link: note.link || '',
-            title: note.title || '',
-            theme_name: note.theme_name || '',
+            description: note.description,
+            id: note.id,
+            link: note.link,
+            title: note.title,
+            theme_name: '',
             is_favorite: false
         });
         setIsFavorite(false);

@@ -48,8 +48,10 @@ export const mainButton = (buttonText, isEnabled, color, callback) => {
     tg.MainButton.hide();
   }
 
-  if (callback) {
+  if (callback !== null) {
     tg.MainButton.onClick(callback);
+  } else {
+    tg.MainButton.onClick(null);
   }
 };
 
@@ -61,6 +63,8 @@ export const backButton = (isEnabled, callback) => {
   }
   if (callback !== null) {
     tg.BackButton.onClick(callback);
+  } else {
+    tg.BackButton.onClick(null);
   }
 };
 
