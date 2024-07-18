@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import {backButton, mainButton, showAlertPopup} from "../telegram";
@@ -68,7 +68,7 @@ const notSavedNotesTest = [
     }
 ];
 
-const AddNote = () => {
+const AddNote = (callback, deps) => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [show, setShow] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -85,6 +85,32 @@ const AddNote = () => {
     const location = useLocation();
     const inputRef = useRef(null);
     const navigate = useNavigate();
+
+    // const isCanBeSaved = useCallback(() => {
+    //     return selectedUnSavedNote.id.trim() !== '' &&
+    //         selectedUnSavedNote.title.trim() !== '' &&
+    //         selectedUnSavedNote.description.trim() !== '' &&
+    //         selectedUnSavedNote.link.trim() !== '' &&
+    //         selectedTheme.trim() !== '';
+    // }, [selectedTheme, selectedUnSavedNote.description, selectedUnSavedNote.id, selectedUnSavedNote.link, selectedUnSavedNote.title]);
+
+    const setupMainButton = useCallback(() => {
+        let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
+                && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
+                && selectedTheme.trim() !== '';
+        mainButton("Save note", isCanBeSaved, "#2cab37", () => {
+            console.log("Button in Component A clicked");
+            if (!isCanBeSaved) {
+                showAlertPopup("Required fields are empty! "
+                    + "\nId: " + selectedUnSavedNote.id
+                    + "\ntitle: " + selectedUnSavedNote.title
+                    + "\ndesc: " + selectedUnSavedNote.description
+                    + "\nlink: " + selectedUnSavedNote.link
+                    + "\ntheme: " + selectedTheme);
+            }
+            // Your logic for saving the note
+        });
+    }, [selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
 
     useEffect(() => {
         if (location.state && location.state.note) {
@@ -115,27 +141,15 @@ const AddNote = () => {
         // fetchNotSavedNotes();
 
         setNotSavedNotes(notSavedNotesTest);
-
-        mainButton("Save note", true, null, () => {
-            console.log("Button in Component A clicked");
-            let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
-                && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
-                && selectedTheme.trim() !== '';
-            if (!isCanBeSaved) {
-                showAlertPopup("Required fields are empty! "
-                    + "\nId: " + selectedUnSavedNote.id
-                    + "\ntitle: " + selectedUnSavedNote.title
-                    + "\ndesc: " + selectedUnSavedNote.description
-                    + "\nlink: " + selectedUnSavedNote.link
-                    + "\ntheme: " + selectedTheme)
-            }
-            // Ваша логика для Component A
-        })
-
+        setupMainButton();
         backButton(true, () => {
             navigate('/')
         })
-    }, [selectedUnSavedNote, selectedTheme, navigate]);
+    }, [navigate, setupMainButton]);
+
+    useEffect(() => {
+        setupMainButton();
+    }, [setupMainButton]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -149,19 +163,6 @@ const AddNote = () => {
             document.removeEventListener('click', handleClickOutside, true);
         };
     }, []);
-
-    // const showMainButton = () => {
-    //     mainButton("Save note", true, null, () => {
-    //         console.log("Button in Component A clicked");
-    //         let isCanBeSaved = selectedUnSavedNote.id.trim() !== '' && selectedUnSavedNote.title.trim() !== ''
-    //             && selectedUnSavedNote.description.trim() !== '' && selectedUnSavedNote.link.trim() !== ''
-    //             && selectedTheme.trim() !== '';
-    //         if (!isCanBeSaved) {
-    //             showAlertPopup("Required fields are empty!")
-    //         }
-    //         // Ваша логика для Component A
-    //     });
-    // };
 
     const handleOffcanvasClose = () => {
         setShow(false);
