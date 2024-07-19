@@ -142,10 +142,16 @@ const AddNote = () => {
                 form.reportValidity();
             } else {
                 console.log("Form is valid and can be submitted");
-                const formData = new FormData(form);
                 const formValues = {};
-                formData.forEach((value, key) => {
-                    formValues[key] = value;
+                form.querySelectorAll('input, textarea').forEach((input) => {
+                    const group = input.closest('.input-group');
+                    if (group) {
+                        const label = group.querySelector('.input-group-text');
+                        if (label) {
+                            const key = label.id;
+                            formValues[key] = input.value;
+                        }
+                    }
                 });
                 showAlertPopup("VALID! Form values: ", formValues);
             }
