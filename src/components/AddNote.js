@@ -153,7 +153,7 @@ const AddNote = () => {
                         }
                     }
                 });
-                showAlertPopup("VALID! Form values: ", formValues);
+                showAlertPopup("VALID! Form values: ", form);
             }
         });
         backButton(true, () => {
