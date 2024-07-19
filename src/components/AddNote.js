@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import {backButton, mainButton, showAlertPopup} from "../telegram";
@@ -71,6 +71,7 @@ const notSavedNotesTest = [
 const AddNote = () => {
     const [notSavedNote, setNotSavedNotes] = useState(null);
     const [show, setShow] = useState(false);
+    const [validated, setValidated] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
     const [selectedTheme, setSelectedTheme] = useState('');
     const [selectedUnSavedNote, setSelectedUnSavedNote] = useState({
@@ -85,26 +86,26 @@ const AddNote = () => {
     const location = useLocation();
     const inputRef = useRef(null);
     const navigate = useNavigate();
-    const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' &&
-                         selectedUnSavedNote.title.trim() !== '' &&
-                         selectedUnSavedNote.description.trim() !== '' &&
-                         selectedUnSavedNote.link.trim() !== '' &&
-                         selectedTheme.trim() !== '';
-
-    const setupMainButton = useCallback(() => {
-        mainButton("Save note", isCanBeSaved, "#2cab37", () => {
-            console.log("Button in Component A clicked");
-            if (!isCanBeSaved) {
-                showAlertPopup("Required fields are empty! "
-                    + "\nId: " + selectedUnSavedNote.id
-                    + "\ntitle: " + selectedUnSavedNote.title
-                    + "\ndesc: " + selectedUnSavedNote.description
-                    + "\nlink: " + selectedUnSavedNote.link
-                    + "\ntheme: " + selectedTheme);
-            }
-            // Your logic for saving the note
-        });
-    }, [isCanBeSaved, selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
+    // const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' &&
+    //                      selectedUnSavedNote.title.trim() !== '' &&
+    //                      selectedUnSavedNote.description.trim() !== '' &&
+    //                      selectedUnSavedNote.link.trim() !== '' &&
+    //                      selectedTheme.trim() !== '';
+    //
+    // const setupMainButton = useCallback(() => {
+    //     mainButton("Save note", isCanBeSaved, "#2cab37", () => {
+    //         console.log("Button in Component A clicked");
+    //         if (!isCanBeSaved) {
+    //             showAlertPopup("Required fields are empty! "
+    //                 + "\nId: " + selectedUnSavedNote.id
+    //                 + "\ntitle: " + selectedUnSavedNote.title
+    //                 + "\ndesc: " + selectedUnSavedNote.description
+    //                 + "\nlink: " + selectedUnSavedNote.link
+    //                 + "\ntheme: " + selectedTheme);
+    //         }
+    //         // Your logic for saving the note
+    //     });
+    // }, [isCanBeSaved, selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
 
     useEffect(() => {
         if (location.state && location.state.note) {
@@ -135,15 +136,23 @@ const AddNote = () => {
         // fetchNotSavedNotes();
 
         setNotSavedNotes(notSavedNotesTest);
-        setupMainButton();
+        mainButton("Save note", true, "#2cab37", () => {
+            const form = document.getElementById('custom-form');
+            if (form.checkValidity() === false) {
+                form.reportValidity();
+            } else {
+                console.log("Form is valid and can be submitted");
+                showAlertPopup("VALID!");
+            }
+        });
         backButton(true, () => {
             navigate('/')
         })
-    }, [navigate, setupMainButton]);
+    }, [navigate]);
 
-    useEffect(() => {
-        setupMainButton();
-    }, [setupMainButton]);
+    // useEffect(() => {
+    //     setupMainButton();
+    // }, [setupMainButton]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -169,20 +178,20 @@ const AddNote = () => {
     };
     const handleFavoriteChange = () => {
         setIsFavorite(!isFavorite);
-        setSelectedUnSavedNote(prevState => (
-            // {
-            //     ...prevState,
-            //     is_favorite: !isFavorite
-            // }
-            {
-                description: prevState.description,
-                id: prevState.id,
-                link: prevState.link,
-                title: prevState.title,
-                theme_name: prevState.theme_name,
-                is_favorite: !isFavorite
-            }
-        ));
+        // setSelectedUnSavedNote(prevState => (
+        //     // {
+        //     //     ...prevState,
+        //     //     is_favorite: !isFavorite
+        //     // }
+        //     {
+        //         description: prevState.description,
+        //         id: prevState.id,
+        //         link: prevState.link,
+        //         title: prevState.title,
+        //         theme_name: prevState.theme_name,
+        //         is_favorite: !isFavorite
+        //     }
+        // ));
     };
     const handleUnSavedNoteClick = (note) => {
         setSelectedUnSavedNote({
@@ -195,6 +204,15 @@ const AddNote = () => {
         });
         setIsFavorite(false);
         setShow(false);
+    };
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        setValidated(true);
     };
 
     return (
@@ -232,87 +250,104 @@ const AddNote = () => {
                 </Offcanvas.Body>
             </Offcanvas>
             <div className="row justify-content-center">
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Title"
-                        aria-label="Title"
-                        aria-describedby="title-addon"
-                        value={selectedUnSavedNote.title}
-                        onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            // return ({...prevState, title: e.target.value});
-                            return {
-                                description: prevState.description,
-                                id: prevState.id,
-                                link: prevState.link,
-                                title: e.target.value,
-                                theme_name: prevState.theme_name,
-                                is_favorite: prevState.is_favorite
-                            }
-                        })}
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <Form.Control
-                        placeholder="Description"
-                        aria-label="Description"
-                        aria-describedby="description-addon"
-                        value={selectedUnSavedNote.description}
-                        onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            // return ({...prevState, description: e.target.value});
-                            return {
-                                description: e.target.value,
-                                id: prevState.id,
-                                link: prevState.link,
-                                title: prevState.title,
-                                theme_name: prevState.theme_name,
-                                is_favorite: prevState.is_favorite
-                            }
-                        })}
-                    />
-                </InputGroup>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="url-addon">url</InputGroup.Text>
-                    <Form.Control
-                        placeholder="https://test.com"
-                        aria-label="Link"
-                        aria-describedby="url-addon"
-                        value={selectedUnSavedNote.link}
-                        onChange={(e) => setSelectedUnSavedNote(
-                            prevState => {
-                                // return ({...prevState, link: e.target.value});
-                                return {
-                                    description: prevState.description,
-                                    id: prevState.id,
-                                    link: e.target.value,
-                                    title: prevState.title,
-                                    theme_name: prevState.theme_name,
-                                    is_favorite: prevState.is_favorite
-                                }
-                            }
-                        )}
-                    />
-                </InputGroup>
-                <InputGroup className="mb-4">
-                    <DropdownButton title='' onSelect={handleSelectTheme}>
-                        {themeList && themeList.map((theme, index) => (
-                            <Dropdown.Item key={index} eventKey={theme.name}>{theme.name}</Dropdown.Item>
-                        ))}
-                    </DropdownButton>
-                    <Form.Control placeholder="Select or write a new theme name" aria-label="Theme"
-                                  aria-describedby="theme-addon" style={{fontSize: '14px'}}
-                                  value={selectedTheme}
-                                  onChange={(e) => setSelectedTheme(e.target.value)}
-                    />
-                </InputGroup>
-                <InputGroup>
-                    <Form.Check
-                        type="switch"
-                        id="is-favorite"
-                        label="Add to favorite"
-                        checked={isFavorite}
-                        onChange={handleFavoriteChange}
-                    />
-                </InputGroup>
+                <Form id="custom-form" noValidate validated={validated} onSubmit={handleSubmit}>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            required
+                            placeholder="Title"
+                            aria-label="Title"
+                            aria-describedby="title-addon"
+                            value={selectedUnSavedNote.title}
+                            // onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            //     // return ({...prevState, title: e.target.value});
+                            //     return {
+                            //         description: prevState.description,
+                            //         id: prevState.id,
+                            //         link: prevState.link,
+                            //         title: e.target.value,
+                            //         theme_name: prevState.theme_name,
+                            //         is_favorite: prevState.is_favorite
+                            //     }
+                            // })}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please choose the title
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <Form.Control
+                            required
+                            placeholder="Description"
+                            aria-label="Description"
+                            aria-describedby="description-addon"
+                            value={selectedUnSavedNote.description}
+                            // onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            //     // return ({...prevState, description: e.target.value});
+                            //     return {
+                            //         description: e.target.value,
+                            //         id: prevState.id,
+                            //         link: prevState.link,
+                            //         title: prevState.title,
+                            //         theme_name: prevState.theme_name,
+                            //         is_favorite: prevState.is_favorite
+                            //     }
+                            // })}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please choose the description
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="url-addon">url</InputGroup.Text>
+                        <Form.Control
+                            required
+                            placeholder="https://test.com"
+                            aria-label="Link"
+                            aria-describedby="url-addon"
+                            value={selectedUnSavedNote.link}
+                            // onChange={(e) => setSelectedUnSavedNote(
+                            //     prevState => {
+                            //         // return ({...prevState, link: e.target.value});
+                            //         return {
+                            //             description: prevState.description,
+                            //             id: prevState.id,
+                            //             link: e.target.value,
+                            //             title: prevState.title,
+                            //             theme_name: prevState.theme_name,
+                            //             is_favorite: prevState.is_favorite
+                            //         }
+                            //     }
+                            // )}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please choose the url
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    <InputGroup className="mb-4">
+                        <DropdownButton title='' onSelect={handleSelectTheme}>
+                            {themeList && themeList.map((theme, index) => (
+                                <Dropdown.Item key={index} eventKey={theme.name}>{theme.name}</Dropdown.Item>
+                            ))}
+                        </DropdownButton>
+                        <Form.Control required placeholder="Select or write a new theme name" aria-label="Theme"
+                                      aria-describedby="theme-addon" style={{fontSize: '14px'}}
+                                      value={selectedTheme}
+                                      onChange={(e) => setSelectedTheme(e.target.value)}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            Please choose the theme
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    <InputGroup>
+                        <Form.Check
+                            type="switch"
+                            id="is-favorite"
+                            label="Add to favorite"
+                            checked={isFavorite}
+                            onChange={handleFavoriteChange}
+                        />
+                    </InputGroup>
+                </Form>
             </div>
         </div>
     );
