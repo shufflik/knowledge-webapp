@@ -142,7 +142,12 @@ const AddNote = () => {
                 form.reportValidity();
             } else {
                 console.log("Form is valid and can be submitted");
-                showAlertPopup("VALID!");
+                const formData = new FormData(form);
+                const formValues = {};
+                formData.forEach((value, key) => {
+                    formValues[key] = value;
+                });
+                showAlertPopup("VALID! Form values: ", formValues);
             }
         });
         backButton(true, () => {
