@@ -258,8 +258,8 @@ const AddNote = () => {
                             aria-label="Title"
                             aria-describedby="title-addon"
                             value={selectedUnSavedNote.title}
-                            // onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            //     // return ({...prevState, title: e.target.value});
+                            onChange={(e) => setSelectedUnSavedNote(prevState => {
+                                return ({...prevState, title: e.target.value});
                             //     return {
                             //         description: prevState.description,
                             //         id: prevState.id,
@@ -268,7 +268,7 @@ const AddNote = () => {
                             //         theme_name: prevState.theme_name,
                             //         is_favorite: prevState.is_favorite
                             //     }
-                            // })}
+                            })}
                         />
                         <Form.Control.Feedback type="invalid">
                             Please choose the title
@@ -281,17 +281,17 @@ const AddNote = () => {
                             aria-label="Description"
                             aria-describedby="description-addon"
                             value={selectedUnSavedNote.description}
-                            // onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            //     // return ({...prevState, description: e.target.value});
-                            //     return {
-                            //         description: e.target.value,
-                            //         id: prevState.id,
-                            //         link: prevState.link,
-                            //         title: prevState.title,
-                            //         theme_name: prevState.theme_name,
-                            //         is_favorite: prevState.is_favorite
-                            //     }
-                            // })}
+                            onChange={(e) => setSelectedUnSavedNote(prevState => {
+                                return ({...prevState, description: e.target.value});
+                                // return {
+                                //     description: e.target.value,
+                                //     id: prevState.id,
+                                //     link: prevState.link,
+                                //     title: prevState.title,
+                                //     theme_name: prevState.theme_name,
+                                //     is_favorite: prevState.is_favorite
+                                // }
+                            })}
                         />
                         <Form.Control.Feedback type="invalid">
                             Please choose the description
@@ -305,19 +305,19 @@ const AddNote = () => {
                             aria-label="Link"
                             aria-describedby="url-addon"
                             value={selectedUnSavedNote.link}
-                            // onChange={(e) => setSelectedUnSavedNote(
-                            //     prevState => {
-                            //         // return ({...prevState, link: e.target.value});
-                            //         return {
-                            //             description: prevState.description,
-                            //             id: prevState.id,
-                            //             link: e.target.value,
-                            //             title: prevState.title,
-                            //             theme_name: prevState.theme_name,
-                            //             is_favorite: prevState.is_favorite
-                            //         }
-                            //     }
-                            // )}
+                            onChange={(e) => setSelectedUnSavedNote(
+                                prevState => {
+                                    return ({...prevState, link: e.target.value});
+                                    // return {
+                                    //     description: prevState.description,
+                                    //     id: prevState.id,
+                                    //     link: e.target.value,
+                                    //     title: prevState.title,
+                                    //     theme_name: prevState.theme_name,
+                                    //     is_favorite: prevState.is_favorite
+                                    // }
+                                }
+                            )}
                         />
                         <Form.Control.Feedback type="invalid">
                             Please choose the url
