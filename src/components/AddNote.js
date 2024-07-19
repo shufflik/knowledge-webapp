@@ -169,10 +169,20 @@ const AddNote = () => {
     };
     const handleFavoriteChange = () => {
         setIsFavorite(!isFavorite);
-        setSelectedUnSavedNote(prevState => ({
-            ...prevState,
-            is_favorite: !isFavorite
-        }));
+        setSelectedUnSavedNote(prevState => (
+            // {
+            //     ...prevState,
+            //     is_favorite: !isFavorite
+            // }
+            {
+                description: prevState.description,
+                id: prevState.id,
+                link: prevState.link,
+                title: prevState.title,
+                theme_name: prevState.theme_name,
+                is_favorite: !isFavorite
+            }
+        ));
     };
     const handleUnSavedNoteClick = (note) => {
         setSelectedUnSavedNote({
@@ -229,7 +239,15 @@ const AddNote = () => {
                         aria-describedby="title-addon"
                         value={selectedUnSavedNote.title}
                         onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            return ({...prevState, title: e.target.value});
+                            // return ({...prevState, title: e.target.value});
+                            return {
+                                description: prevState.description,
+                                id: prevState.id,
+                                link: prevState.link,
+                                title: e.target.value,
+                                theme_name: prevState.theme_name,
+                                is_favorite: prevState.is_favorite
+                            }
                         })}
                     />
                 </InputGroup>
@@ -240,7 +258,15 @@ const AddNote = () => {
                         aria-describedby="description-addon"
                         value={selectedUnSavedNote.description}
                         onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            return ({...prevState, description: e.target.value});
+                            // return ({...prevState, description: e.target.value});
+                            return {
+                                description: e.target.value,
+                                id: prevState.id,
+                                link: prevState.link,
+                                title: prevState.title,
+                                theme_name: prevState.theme_name,
+                                is_favorite: prevState.is_favorite
+                            }
                         })}
                     />
                 </InputGroup>
@@ -251,9 +277,19 @@ const AddNote = () => {
                         aria-label="Link"
                         aria-describedby="url-addon"
                         value={selectedUnSavedNote.link}
-                        onChange={(e) => setSelectedUnSavedNote(prevState => {
-                            return ({...prevState, link: e.target.value});
-                        })}
+                        onChange={(e) => setSelectedUnSavedNote(
+                            prevState => {
+                                // return ({...prevState, link: e.target.value});
+                                return {
+                                    description: prevState.description,
+                                    id: prevState.id,
+                                    link: e.target.value,
+                                    title: prevState.title,
+                                    theme_name: prevState.theme_name,
+                                    is_favorite: prevState.is_favorite
+                                }
+                            }
+                        )}
                     />
                 </InputGroup>
                 <InputGroup className="mb-4">
