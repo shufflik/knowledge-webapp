@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import {backButton, mainButton, showAlertPopup} from "../telegram";
@@ -107,9 +107,8 @@ const AddNote = () => {
     //     });
     // }, [isCanBeSaved, selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
 
-    useEffect(() => {
+    useCallback(() => {
         if (location.state && location.state.note) {
-            showAlertPopup(`location title: ${location.state.note.title}`)
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
