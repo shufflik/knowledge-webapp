@@ -136,58 +136,58 @@ const AddNote = () => {
         // fetchNotSavedNotes();
 
         setNotSavedNotes(notSavedNotesTest);
-        // mainButton("Save note", true, "#2cab37", () => {
-        //     const form = document.getElementById('custom-form');
-        //     if (form.checkValidity() === false) {
-        //         form.reportValidity();
-        //     } else {
-        //         console.log("Form is valid and can be submitted");
-        //         const formValues = {};
-        //         form.querySelectorAll('input, textarea').forEach((input) => {
-        //             const group = input.closest('.input-group');
-        //             if (group) {
-        //                 const label = group.querySelector('.input-group-text');
-        //                 if (label) {
-        //                     const key = label.id;
-        //                     formValues[key] = input.value;
-        //                 }
-        //             }
-        //         });
-        //         showAlertPopup("VALID! Form values: ", form);
-        //     }
-        // });
-        backButton(true, () => {
-            navigate('/')
-        })
-    }, [navigate]);
-
-    useEffect(() => {
         mainButton("Save note", true, "#2cab37", () => {
             const form = document.getElementById('custom-form');
             if (form.checkValidity() === false) {
                 form.reportValidity();
             } else {
                 console.log("Form is valid and can be submitted");
-                // const formValues = {};
-                // form.querySelectorAll('input, textarea').forEach((input) => {
-                //     const group = input.closest('.input-group');
-                //     if (group) {
-                //         const label = group.querySelector('.input-group-text');
-                //         if (label) {
-                //             const key = label.id;
-                //             formValues[key] = input.value;
-                //         }
-                //     }
-                // });
-                showAlertPopup(`VALID! 
-                    Title: ${selectedUnSavedNote.title}, 
-                    description: ${selectedUnSavedNote.description},
-                    url: ${selectedUnSavedNote.link},
-                    theme: ${selectedUnSavedNote.theme_name}`
-                );
+                const formValues = {};
+                form.querySelectorAll('input, textarea').forEach((input) => {
+                    const group = input.closest('.input-group');
+                    if (group) {
+                        const label = group.querySelector('.input-group-text');
+                        if (label) {
+                            const key = label.id;
+                            formValues[key] = input.value;
+                        }
+                    }
+                });
+                showAlertPopup(`VALID! Form values: ${form}`);
             }
         });
-    }, [selectedUnSavedNote]);
+        backButton(true, () => {
+            navigate('/')
+        })
+    }, [navigate]);
+
+    // useEffect(() => {
+    //     mainButton("Save note", true, "#2cab37", () => {
+    //         const form = document.getElementById('custom-form');
+    //         if (form.checkValidity() === false) {
+    //             form.reportValidity();
+    //         } else {
+    //             console.log("Form is valid and can be submitted");
+    //             // const formValues = {};
+    //             // form.querySelectorAll('input, textarea').forEach((input) => {
+    //             //     const group = input.closest('.input-group');
+    //             //     if (group) {
+    //             //         const label = group.querySelector('.input-group-text');
+    //             //         if (label) {
+    //             //             const key = label.id;
+    //             //             formValues[key] = input.value;
+    //             //         }
+    //             //     }
+    //             // });
+    //             showAlertPopup(`VALID!
+    //                 Title: ${selectedUnSavedNote.title},
+    //                 description: ${selectedUnSavedNote.description},
+    //                 url: ${selectedUnSavedNote.link},
+    //                 theme: ${selectedUnSavedNote.theme_name}`
+    //             );
+    //         }
+    //     });
+    // }, [selectedUnSavedNote]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
