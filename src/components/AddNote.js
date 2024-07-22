@@ -114,8 +114,8 @@ const AddNote = () => {
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
+            navigate('/add', { replace: true, state: {} });
         }
-        navigate('/add', { replace: true, state: {} });
     }, [location.state, navigate]);
 
     useEffect(() => {
