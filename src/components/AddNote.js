@@ -109,10 +109,10 @@ const AddNote = () => {
 
     useEffect(() => {
         if (location.state && location.state.note) {
+            showAlertPopup(`location title: ${location.state.note.title}`)
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
-            location.state.note = null
         }
     }, [location.state]);
 
