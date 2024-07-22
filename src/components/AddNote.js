@@ -113,7 +113,7 @@ const AddNote = () => {
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
         }
-    }, [location.state, selectedUnSavedNote.id]);
+    }, [location.state, selectedUnSavedNote]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
