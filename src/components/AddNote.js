@@ -109,14 +109,14 @@ const AddNote = () => {
 
     useEffect(() => {
         console.log("location state: " + location.state)
-        if (location.state && location.state.note) {
+        if (location.state && location.state.note && location.state.note.id !== null) {
             console.log("Pass location state: " + location.state)
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
-            navigate('/add', { replace: true, state: {} });
+            // navigate('/add', { replace: true, state: {} });
         }
-    }, [location.state, navigate]);
+    }, [location.state]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
