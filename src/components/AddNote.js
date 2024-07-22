@@ -112,6 +112,7 @@ const AddNote = () => {
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
+            location.state.note = null
         }
     }, [location.state]);
 
