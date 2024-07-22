@@ -136,34 +136,53 @@ const AddNote = () => {
         // fetchNotSavedNotes();
 
         setNotSavedNotes(notSavedNotesTest);
+        // mainButton("Save note", true, "#2cab37", () => {
+        //     const form = document.getElementById('custom-form');
+        //     if (form.checkValidity() === false) {
+        //         form.reportValidity();
+        //     } else {
+        //         console.log("Form is valid and can be submitted");
+        //         const formValues = {};
+        //         form.querySelectorAll('input, textarea').forEach((input) => {
+        //             const group = input.closest('.input-group');
+        //             if (group) {
+        //                 const label = group.querySelector('.input-group-text');
+        //                 if (label) {
+        //                     const key = label.id;
+        //                     formValues[key] = input.value;
+        //                 }
+        //             }
+        //         });
+        //         showAlertPopup("VALID! Form values: ", form);
+        //     }
+        // });
+        backButton(true, () => {
+            navigate('/')
+        })
+    }, [navigate]);
+
+    useEffect(() => {
         mainButton("Save note", true, "#2cab37", () => {
             const form = document.getElementById('custom-form');
             if (form.checkValidity() === false) {
                 form.reportValidity();
             } else {
                 console.log("Form is valid and can be submitted");
-                const formValues = {};
-                form.querySelectorAll('input, textarea').forEach((input) => {
-                    const group = input.closest('.input-group');
-                    if (group) {
-                        const label = group.querySelector('.input-group-text');
-                        if (label) {
-                            const key = label.id;
-                            formValues[key] = input.value;
-                        }
-                    }
-                });
-                showAlertPopup("VALID! Form values: ", form);
+                // const formValues = {};
+                // form.querySelectorAll('input, textarea').forEach((input) => {
+                //     const group = input.closest('.input-group');
+                //     if (group) {
+                //         const label = group.querySelector('.input-group-text');
+                //         if (label) {
+                //             const key = label.id;
+                //             formValues[key] = input.value;
+                //         }
+                //     }
+                // });
+                showAlertPopup("VALID! Form values: ", selectedUnSavedNote.title);
             }
         });
-        backButton(true, () => {
-            navigate('/')
-        })
-    }, [navigate]);
-
-    // useEffect(() => {
-    //     setupMainButton();
-    // }, [setupMainButton]);
+    }, [selectedUnSavedNote.title]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -270,15 +289,16 @@ const AddNote = () => {
                             aria-describedby="title-addon"
                             value={selectedUnSavedNote.title}
                             onChange={(e) => setSelectedUnSavedNote(prevState => {
-                                return ({...prevState, title: e.target.value});
-                            //     return {
-                            //         description: prevState.description,
-                            //         id: prevState.id,
-                            //         link: prevState.link,
-                            //         title: e.target.value,
-                            //         theme_name: prevState.theme_name,
-                            //         is_favorite: prevState.is_favorite
-                            //     }
+                                // return ({...prevState, title: e.target.value});
+                                console.log("prevState: ", prevState)
+                                return {
+                                    description: prevState.description,
+                                    id: prevState.id,
+                                    link: prevState.link,
+                                    title: e.target.value,
+                                    theme_name: prevState.theme_name,
+                                    is_favorite: prevState.is_favorite
+                                }
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -293,15 +313,16 @@ const AddNote = () => {
                             aria-describedby="description-addon"
                             value={selectedUnSavedNote.description}
                             onChange={(e) => setSelectedUnSavedNote(prevState => {
-                                return ({...prevState, description: e.target.value});
-                                // return {
-                                //     description: e.target.value,
-                                //     id: prevState.id,
-                                //     link: prevState.link,
-                                //     title: prevState.title,
-                                //     theme_name: prevState.theme_name,
-                                //     is_favorite: prevState.is_favorite
-                                // }
+                                // return ({...prevState, description: e.target.value});
+                                console.log("prevState: ", prevState)
+                                return {
+                                    description: e.target.value,
+                                    id: prevState.id,
+                                    link: prevState.link,
+                                    title: prevState.title,
+                                    theme_name: prevState.theme_name,
+                                    is_favorite: prevState.is_favorite
+                                }
                             })}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -318,15 +339,16 @@ const AddNote = () => {
                             value={selectedUnSavedNote.link}
                             onChange={(e) => setSelectedUnSavedNote(
                                 prevState => {
-                                    return ({...prevState, link: e.target.value});
-                                    // return {
-                                    //     description: prevState.description,
-                                    //     id: prevState.id,
-                                    //     link: e.target.value,
-                                    //     title: prevState.title,
-                                    //     theme_name: prevState.theme_name,
-                                    //     is_favorite: prevState.is_favorite
-                                    // }
+                                    // return ({...prevState, link: e.target.value});
+                                    console.log("prevState: ", prevState)
+                                    return {
+                                        description: prevState.description,
+                                        id: prevState.id,
+                                        link: e.target.value,
+                                        title: prevState.title,
+                                        theme_name: prevState.theme_name,
+                                        is_favorite: prevState.is_favorite
+                                    }
                                 }
                             )}
                         />
