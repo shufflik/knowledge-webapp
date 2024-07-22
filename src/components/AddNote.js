@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
 import {backButton, mainButton, showAlertPopup} from "../telegram";
@@ -107,13 +107,13 @@ const AddNote = () => {
     //     });
     // }, [isCanBeSaved, selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
 
-    useCallback(() => {
-        if (location.state && location.state.note) {
+    useEffect(() => {
+        if (location.state && location.state.note && location.state.note.id !== selectedUnSavedNote.id) {
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
         }
-    }, [location.state]);
+    }, [location.state, selectedUnSavedNote.id]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
