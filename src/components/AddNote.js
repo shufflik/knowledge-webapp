@@ -108,12 +108,15 @@ const AddNote = () => {
     // }, [isCanBeSaved, selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
 
     useEffect(() => {
-        if (location.state && location.state.note && location.state.note.id !== selectedUnSavedNote.id) {
+        console.log("location state: " + location.state)
+        if (location.state && location.state.note) {
+            showAlertPopup('Pass location state')
+            console.log("Pass location state: " + location.state)
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
         }
-    }, [location.state, selectedUnSavedNote]);
+    }, [location.state]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
@@ -157,34 +160,6 @@ const AddNote = () => {
             navigate('/')
         })
     }, [navigate]);
-
-    // useEffect(() => {
-    //     mainButton("Save note", true, "#2cab37", () => {
-    //         const form = document.getElementById('custom-form');
-    //         if (form.checkValidity() === false) {
-    //             form.reportValidity();
-    //         } else {
-    //             console.log("Form is valid and can be submitted");
-    //             // const formValues = {};
-    //             // form.querySelectorAll('input, textarea').forEach((input) => {
-    //             //     const group = input.closest('.input-group');
-    //             //     if (group) {
-    //             //         const label = group.querySelector('.input-group-text');
-    //             //         if (label) {
-    //             //             const key = label.id;
-    //             //             formValues[key] = input.value;
-    //             //         }
-    //             //     }
-    //             // });
-    //             showAlertPopup(`VALID!
-    //                 Title: ${selectedUnSavedNote.title},
-    //                 description: ${selectedUnSavedNote.description},
-    //                 url: ${selectedUnSavedNote.link},
-    //                 theme: ${selectedUnSavedNote.theme_name}`
-    //             );
-    //         }
-    //     });
-    // }, [selectedUnSavedNote]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -245,6 +220,24 @@ const AddNote = () => {
             event.stopPropagation();
         }
         setValidated(true);
+    };
+
+    const handleSaveNote = () => {
+        const form = document.getElementById('custom-form');
+        if (form.checkValidity() === false) {
+            form.reportValidity();
+        } else {
+            console.log("Form is valid and can be submitted");
+            const formValues = {};
+            form.querySelectorAll('input, textarea').forEach((input) => {
+                if (input.id === 'is-favorite') {
+                    formValues[input.id] = input.checked;
+                } else {
+                    formValues[input.id] = input.value;
+                }
+            });
+            console.log(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+        }
     };
 
     return (
@@ -386,6 +379,7 @@ const AddNote = () => {
                         />
                     </InputGroup>
                 </Form>
+                <Button onClick={handleSaveNote}> Save note </Button>
             </div>
         </div>
     );
