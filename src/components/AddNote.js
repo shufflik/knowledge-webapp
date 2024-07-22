@@ -179,7 +179,12 @@ const AddNote = () => {
                 //         }
                 //     }
                 // });
-                showAlertPopup("VALID! Form values: " + selectedUnSavedNote);
+                showAlertPopup(`VALID! 
+                    Title: ${selectedUnSavedNote.title}, 
+                    description: ${selectedUnSavedNote.description},
+                    url: ${selectedUnSavedNote.link},
+                    theme: ${selectedUnSavedNote.theme_name}`
+                );
             }
         });
     }, [selectedUnSavedNote]);
