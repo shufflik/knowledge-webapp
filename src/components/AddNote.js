@@ -236,6 +236,7 @@ const AddNote = () => {
                 }
             });
             console.log(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+            showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
         }
     };
 
