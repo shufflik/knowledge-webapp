@@ -153,7 +153,7 @@ const AddNote = () => {
                         }
                     }
                 });
-                showAlertPopup(`VALID! Form values: ${formValues}`);
+                showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
             }
         });
         backButton(true, () => {
