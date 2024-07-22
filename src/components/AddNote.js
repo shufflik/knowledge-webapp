@@ -144,13 +144,10 @@ const AddNote = () => {
                 console.log("Form is valid and can be submitted");
                 const formValues = {};
                 form.querySelectorAll('input, textarea').forEach((input) => {
-                    const group = input.closest('.input-group');
-                    if (group) {
-                        const label = group.querySelector('.input-group-text');
-                        if (label) {
-                            const key = label.id;
-                            formValues[key] = input.value;
-                        }
+                    if (input.id === 'is-favorite') {
+                        formValues[input.id] = input.checked;
+                    } else {
+                        formValues[input.id] = input.value;
                     }
                 });
                 showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
@@ -289,6 +286,7 @@ const AddNote = () => {
                     <InputGroup className="mb-3">
                         <Form.Control
                             required
+                            id="title"
                             placeholder="Title"
                             aria-label="Title"
                             aria-describedby="title-addon"
@@ -313,6 +311,7 @@ const AddNote = () => {
                     <InputGroup className="mb-3">
                         <Form.Control
                             required
+                            id="description"
                             placeholder="Description"
                             aria-label="Description"
                             aria-describedby="description-addon"
@@ -338,6 +337,7 @@ const AddNote = () => {
                         <InputGroup.Text id="url-addon">url</InputGroup.Text>
                         <Form.Control
                             required
+                            id="url"
                             placeholder="https://test.com"
                             aria-label="Link"
                             aria-describedby="url-addon"
@@ -367,7 +367,7 @@ const AddNote = () => {
                                 <Dropdown.Item key={index} eventKey={theme.name}>{theme.name}</Dropdown.Item>
                             ))}
                         </DropdownButton>
-                        <Form.Control required placeholder="Select or write a new theme name" aria-label="Theme"
+                        <Form.Control required id="theme" placeholder="Select or write a new theme name" aria-label="Theme"
                                       aria-describedby="theme-addon" style={{fontSize: '14px'}}
                                       value={selectedTheme}
                                       onChange={(e) => setSelectedTheme(e.target.value)}
