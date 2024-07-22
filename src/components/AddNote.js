@@ -109,9 +109,16 @@ const AddNote = () => {
 
     useEffect(() => {
         console.log("location state: " + location.state)
-        if (location.state && location.state.note && location.state.note.id !== null) {
+        if (location.state && location.state.note) {
             console.log("Pass location state: " + location.state)
-            setSelectedUnSavedNote(location.state.note);
+            setSelectedUnSavedNote({
+                description: location.state.note.description,
+                id: location.state.note.id,
+                link: location.state.note.link,
+                title: location.state.note.title,
+                theme_name: location.state.note.theme_name,
+                is_favorite: location.state.note.is_favorite
+            });
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
             // navigate('/add', { replace: true, state: {} });
