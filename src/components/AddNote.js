@@ -115,7 +115,8 @@ const AddNote = () => {
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
         }
-    }, [location.state]);
+        navigate('/add', { replace: true, state: {} });
+    }, [location.state, navigate]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
