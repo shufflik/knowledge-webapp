@@ -179,10 +179,10 @@ const AddNote = () => {
                 //         }
                 //     }
                 // });
-                showAlertPopup("VALID! Form values: ", selectedUnSavedNote.title);
+                showAlertPopup("VALID! Form values: " + selectedUnSavedNote);
             }
         });
-    }, [selectedUnSavedNote.title]);
+    }, [selectedUnSavedNote]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
