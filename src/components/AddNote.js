@@ -110,7 +110,6 @@ const AddNote = () => {
     useEffect(() => {
         console.log("location state: " + location.state)
         if (location.state && location.state.note) {
-            showAlertPopup('Pass location state')
             console.log("Pass location state: " + location.state)
             setSelectedUnSavedNote(location.state.note);
             setSelectedTheme(location.state.note.theme_name);
