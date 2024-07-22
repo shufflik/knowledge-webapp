@@ -112,7 +112,7 @@ const AddNote = () => {
         if (location.state && location.state.note) {
             console.log("Pass location state: " + location.state)
             setSelectedUnSavedNote(prevState => {
-                if (prevState.id !== location.state.note.id) {
+                if (prevState.id === location.state.note.id) {
                     return {
                         description: location.state.note.description,
                         id: location.state.note.id,
@@ -120,6 +120,15 @@ const AddNote = () => {
                         title: location.state.note.title,
                         theme_name: location.state.note.theme_name,
                         is_favorite: location.state.note.is_favorite
+                    }
+                } else {
+                    return {
+                        description: prevState.description,
+                        id: prevState.id,
+                        link: prevState.link,
+                        title: prevState.title,
+                        theme_name: prevState.theme_name,
+                        is_favorite: prevState.is_favorite
                     }
                 }
             });
