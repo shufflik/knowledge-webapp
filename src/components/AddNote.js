@@ -181,8 +181,15 @@ const AddNote = () => {
                         formValues[input.id] = input.value;
                     }
                 });
-                showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
-                setSelectedUnSavedNote(null)
+                // showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+                setSelectedUnSavedNote({
+                    description: '',
+                    id: '',
+                    link: '',
+                    title: '',
+                    theme_name: '',
+                    is_favorite: false
+                })
             }
         });
         backButton(true, () => {
