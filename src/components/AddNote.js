@@ -109,6 +109,7 @@ const AddNote = () => {
         setNotSavedNotes(notSavedNotesTest);
         mainButton("Save note", true, "#2cab37", handleSaveNote);
         backButton(true, () => navigate('/'));
+        navigate('/add', { replace: true, state: {} });
     }, [navigate]);
 
     // useEffect(() => {
