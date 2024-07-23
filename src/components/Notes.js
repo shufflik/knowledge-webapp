@@ -248,9 +248,8 @@ const Notes = () => {
 
     return (
         <div className="container">
-            <div className="row mb-3 justify-content-center">
+            <div className="row mb-3 justify-content-center sticky-dropdown">
                 <DropdownButton id="dropdown-basic-button" title="Select theme">
-                    {/*<Dropdown.Item onClick={() => setSortedNotes(notes)}>Latest 10</Dropdown.Item>*/}
                     {themes.map((theme) => (
                         <Dropdown.Item onClick={() => sortNotesByTheme(theme.name)}>
                             {theme.name}
