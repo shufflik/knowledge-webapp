@@ -172,28 +172,25 @@ const notesTest = [
 const Notes = () => {
     const [notes, setNotes] = useState([]);
     const [themes, setThemes] = useState([]);
-    const [sortedNotes, setSortedNotes] = useState([]);
     const [currentNote, setCurrentNote] = useState(null);
     const [showFullInfo, setShowFullInfo] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
-        // console.info('Fetching notes..');
-        // const fetchNotes = async () => {
+        // console.info('Fetching themes..');
+        // const fetchThemes = async () => {
         //   try {
-        //     const response = await axios.get('http://127.0.0.1:8000/notes',
+        //     const response = await axios.get('http://127.0.0.1:8000/themes',
         //         {
         //           params: {username: "test"}
         //         }
         //     );
-        //     setNotes(response.data);
+        //     setThemes(response.data);
         //   } catch (error) {
-        //     console.error('Error fetching notes:', error);
+        //     console.error('Error fetching themes:', error);
         //   }
         // };
-        // fetchNotes();
-        setNotes(notesTest)
-        setSortedNotes(notesTest)
+        // fetchThemes();
         setThemes(themeList)
 
         mainButton("Create note", true, null, () => {
@@ -228,8 +225,21 @@ const Notes = () => {
     }
 
     const sortNotesByTheme = (theme_name) => {
-        console.log("Sort by theme: " + theme_name)
-        setSortedNotes(notes.filter((note) => note.theme_name === theme_name))
+        // const fetchNotesByTheme = async () => {
+        //   try {
+        //     const response = await axios.get('http://127.0.0.1:8000/notes',
+        //         {
+        //           params: {username: "test"}
+        //         }
+        //     );
+        //     setNotes(response.data);
+        //   } catch (error) {
+        //     console.error('Error fetching notes:', error);
+        //   }
+        // };
+        // fetchNotesByTheme();
+        //TODO временное решение, для тестирования
+        setNotes(notesTest.filter((note) => note.theme_name === theme_name))
     };
 
     // const handleChangeNote = () => {
@@ -240,7 +250,7 @@ const Notes = () => {
         <div className="container">
             <div className="row mb-3 justify-content-center">
                 <DropdownButton id="dropdown-basic-button" title="Select theme">
-                    <Dropdown.Item onClick={() => setSortedNotes(notes)}>All</Dropdown.Item>
+                    {/*<Dropdown.Item onClick={() => setSortedNotes(notes)}>Latest 10</Dropdown.Item>*/}
                     {themes.map((theme) => (
                         <Dropdown.Item onClick={() => sortNotesByTheme(theme.name)}>
                             {theme.name}
@@ -249,7 +259,7 @@ const Notes = () => {
                 </DropdownButton>
             </div>
             <div className="row justify-content-center">
-                {sortedNotes.map((note, index) => (
+                {notes.map((note, index) => (
                     <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch"
                          onClick={() => handleFullInfoShow(note)}>
                         <NoteCard note={note}/>
