@@ -101,8 +101,7 @@ const Notes = () => {
         setThemes(themeList)
 
         mainButton("Create note", true, null, () => {
-            console.log("Button in Component A clicked");
-            navigate('/add');
+            navigate('/add', {state: {themes: themes}});
         });
         backButton(false, null)
     }, [navigate]);
@@ -111,14 +110,12 @@ const Notes = () => {
         if (showFullInfo && currentNote) {
             // Если информация о заметке показана и текущая заметка обновлена, устанавливаем кнопку "Edit"
             mainButton("Edit", true, "#dea635", () => {
-                console.log("Button in Component A clicked");
                 navigate('/add', {state: {note: currentNote, themes: themes}});
             });
         } else {
             // В противном случае возвращаем кнопку "Create note"
             mainButton("Create note", true, null, () => {
-                console.log("Button in Component A clicked");
-                navigate('/add');
+                navigate('/add', {state: {themes: themes}});
             });
         }
     }, [showFullInfo, currentNote, themes, navigate]);
