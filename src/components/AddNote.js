@@ -131,6 +131,7 @@ const AddNote = () => {
             const form = document.getElementById('custom-form');
             if (form.checkValidity() === false) {
                 form.reportValidity();
+                navigate('/add', {replace: true, state: {}});
             } else {
                 console.log("Form is valid and can be submitted");
                 const formValues = {};
@@ -149,9 +150,9 @@ const AddNote = () => {
                     theme_name: '',
                     is_favorite: false
                 })
+                navigate('/add', {replace: true, state: {}});
                 showAlertPopup(`Saved!`);
             }
-            navigate('/add', {replace: true, state: {}});
         });
         backButton(true, () => {
             navigate('/')
