@@ -105,63 +105,63 @@ const AddNote = () => {
         }
     }, [location.state, navigate]);
 
-    useEffect(() => {
-        setNotSavedNotes(notSavedNotesTest);
-        mainButton("Save note", true, "#2cab37", handleSaveNote);
-        backButton(true, () => navigate('/'));
-        navigate('/add', { replace: true, state: {} });
-    }, [navigate]);
-
     // useEffect(() => {
-    //     // console.info('Fetching not saved notes..');
-    //     // const fetchNotSavedNotes = async () => {
-    //     //     try {
-    //     //         const response = await axios.get('http://127.0.0.1:8000/notes',
-    //     //             {
-    //     //                 params: {username: "test", is_saved: false}
-    //     //             }
-    //     //         );
-    //     //         console.info(response.data)
-    //     //         setNotSavedNotes(response.data);
-    //     //         if (response.data.length > 0) {
-    //     //             setShowModal(true);
-    //     //         }
-    //     //     } catch (error) {
-    //     //         console.error('Error fetching not saved notes:', error);
-    //     //     }
-    //     // };
-    //     // fetchNotSavedNotes();
-    //
     //     setNotSavedNotes(notSavedNotesTest);
-    //     mainButton("Save note", true, "#2cab37", () => {
-    //         const form = document.getElementById('custom-form');
-    //         if (form.checkValidity() === false) {
-    //             form.reportValidity();
-    //         } else {
-    //             console.log("Form is valid and can be submitted");
-    //             const formValues = {};
-    //             form.querySelectorAll('input, textarea').forEach((input) => {
-    //                 if (input.id === 'is-favorite') {
-    //                     formValues[input.id] = input.checked;
-    //                 } else {
-    //                     formValues[input.id] = input.value;
-    //                 }
-    //             });
-    //             showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
-    //             setSelectedUnSavedNote({
-    //                 description: '',
-    //                 id: '',
-    //                 link: '',
-    //                 title: '',
-    //                 theme_name: '',
-    //                 is_favorite: false
-    //             })
-    //         }
-    //     });
-    //     backButton(true, () => {
-    //         navigate('/')
-    //     })
+    //     mainButton("Save note", true, "#2cab37", handleSaveNote);
+    //     backButton(true, () => navigate('/'));
     // }, [navigate]);
+
+    useEffect(() => {
+        // console.info('Fetching not saved notes..');
+        // const fetchNotSavedNotes = async () => {
+        //     try {
+        //         const response = await axios.get('http://127.0.0.1:8000/notes',
+        //             {
+        //                 params: {username: "test", is_saved: false}
+        //             }
+        //         );
+        //         console.info(response.data)
+        //         setNotSavedNotes(response.data);
+        //         if (response.data.length > 0) {
+        //             setShowModal(true);
+        //         }
+        //     } catch (error) {
+        //         console.error('Error fetching not saved notes:', error);
+        //     }
+        // };
+        // fetchNotSavedNotes();
+
+        setNotSavedNotes(notSavedNotesTest);
+        mainButton("Save note", true, "#2cab37", () => {
+            const form = document.getElementById('custom-form');
+            if (form.checkValidity() === false) {
+                form.reportValidity();
+            } else {
+                console.log("Form is valid and can be submitted");
+                const formValues = {};
+                form.querySelectorAll('input, textarea').forEach((input) => {
+                    if (input.id === 'is-favorite') {
+                        formValues[input.id] = input.checked;
+                    } else {
+                        formValues[input.id] = input.value;
+                    }
+                });
+                setSelectedUnSavedNote({
+                    description: '',
+                    id: '',
+                    link: '',
+                    title: '',
+                    theme_name: '',
+                    is_favorite: false
+                })
+                navigate('/add', { replace: true, state: {} });
+                showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+            }
+        });
+        backButton(true, () => {
+            navigate('/')
+        })
+    }, [navigate]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
