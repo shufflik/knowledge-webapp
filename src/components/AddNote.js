@@ -136,7 +136,7 @@ const AddNote = () => {
             setIsFavorite(location.state.note.is_favorite);
             navigate('/add', { replace: true, state: {} });
         }
-    }, [location.state]);
+    }, [location.state, navigate]);
 
     useEffect(() => {
         // console.info('Fetching not saved notes..');
