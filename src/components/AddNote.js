@@ -6,20 +6,20 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {Button, DropdownButton, InputGroup, Dropdown, Offcanvas, Form} from "react-bootstrap";
 import {Textfit} from "react-textfit";
 
-const themeList = [
-  {
-    "id": "71e50e69-cfea-4db7-a06d-35cfe81ac4aa",
-    "created_date": "2024-06-16T23:08:22.416462",
-    "telegram_username": "test_username",
-    "name": "test_theme1"
-  },
-  {
-    "id": "e7e06080-2da1-4b08-833b-3079357b58d2",
-    "created_date": "2024-06-16T23:08:22.416474",
-    "telegram_username": "test_username",
-    "name": "test_theme2"
-  }
-]
+// const themeList = [
+//   {
+//     "id": "71e50e69-cfea-4db7-a06d-35cfe81ac4aa",
+//     "created_date": "2024-06-16T23:08:22.416462",
+//     "telegram_username": "test_username",
+//     "name": "test_theme1"
+//   },
+//   {
+//     "id": "e7e06080-2da1-4b08-833b-3079357b58d2",
+//     "created_date": "2024-06-16T23:08:22.416474",
+//     "telegram_username": "test_username",
+//     "name": "test_theme2"
+//   }
+// ]
 
 const notSavedNotesTest = [
     {
@@ -73,8 +73,9 @@ const AddNote = () => {
     const [show, setShow] = useState(false);
     const [validated, setValidated] = useState(false);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [availableThemes, setAvailableThemes] = useState([])
     const [selectedTheme, setSelectedTheme] = useState('');
-    const [selectedUnSavedNote, setSelectedUnSavedNote] = useState({
+    const [selectedNote, setSelectedNote] = useState({
         description: '',
         id: '',
         link: '',
@@ -88,19 +89,19 @@ const AddNote = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("location state: " + location.state)
-        if (location.state && location.state.note) {
-            console.log("Pass location state: " + location.state)
-            setSelectedUnSavedNote({
-                description: location.state.note.description,
-                id: location.state.note.id,
-                link: location.state.note.link,
-                title: location.state.note.title,
-                theme_name: location.state.note.theme_name,
-                is_favorite: location.state.note.is_favorite
+        if (location.state && location.state.note && location.state.themes) {
+            const note = location.state.note
+            setSelectedNote({
+                description: note.description,
+                id: note.id,
+                link: note.link,
+                title: note.title,
+                theme_name: note.theme_name,
+                is_favorite: note.is_favorite
             });
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
+            setAvailableThemes(location.state.themes)
             navigate('/add', { replace: true, state: {} });
         }
     }, [location.state, navigate]);
@@ -128,7 +129,7 @@ const AddNote = () => {
         setNotSavedNotes(notSavedNotesTest);
         mainButton("Save note", true, "#2cab37", () => {
             let alertText = handleSaveNote()
-            navigate('/add', {replace: true, state: {}});
+            navigate('/', {replace: true, state: {}});
             if (alertText) {
                 showAlertPopup(alertText);
             }
@@ -147,7 +148,7 @@ const AddNote = () => {
             //             formValues[input.id] = input.value;
             //         }
             //     });
-            //     setSelectedUnSavedNote({
+            //     setSelectedNote({
             //         description: '',
             //         id: '',
             //         link: '',
@@ -190,7 +191,7 @@ const AddNote = () => {
         setIsFavorite(!isFavorite);
     };
     const handleUnSavedNoteClick = (note) => {
-        setSelectedUnSavedNote({
+        setSelectedNote({
             description: note.description,
             id: note.id,
             link: note.link,
@@ -225,7 +226,10 @@ const AddNote = () => {
                     formValues[input.id] = input.value;
                 }
             });
-            setSelectedUnSavedNote({
+
+            // TODO request to backend for save note
+
+            setSelectedNote({
                 description: '',
                 id: '',
                 link: '',
@@ -281,8 +285,8 @@ const AddNote = () => {
                             placeholder="Title"
                             aria-label="Title"
                             aria-describedby="title-addon"
-                            value={selectedUnSavedNote.title}
-                            onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            value={selectedNote.title}
+                            onChange={(e) => setSelectedNote(prevState => {
                                 // return ({...prevState, title: e.target.value});
                                 console.log("prevState: ", prevState)
                                 return {
@@ -306,8 +310,8 @@ const AddNote = () => {
                             placeholder="Description"
                             aria-label="Description"
                             aria-describedby="description-addon"
-                            value={selectedUnSavedNote.description}
-                            onChange={(e) => setSelectedUnSavedNote(prevState => {
+                            value={selectedNote.description}
+                            onChange={(e) => setSelectedNote(prevState => {
                                 // return ({...prevState, description: e.target.value});
                                 console.log("prevState: ", prevState)
                                 return {
@@ -332,8 +336,8 @@ const AddNote = () => {
                             placeholder="https://test.com"
                             aria-label="Link"
                             aria-describedby="url-addon"
-                            value={selectedUnSavedNote.link}
-                            onChange={(e) => setSelectedUnSavedNote(
+                            value={selectedNote.link}
+                            onChange={(e) => setSelectedNote(
                                 prevState => {
                                     // return ({...prevState, link: e.target.value});
                                     console.log("prevState: ", prevState)
@@ -354,7 +358,7 @@ const AddNote = () => {
                     </InputGroup>
                     <InputGroup className="mb-4">
                         <DropdownButton title='' onSelect={handleSelectTheme}>
-                            {themeList && themeList.map((theme, index) => (
+                            {availableThemes && availableThemes.map((theme, index) => (
                                 <Dropdown.Item key={index} eventKey={theme.name}>{theme.name}</Dropdown.Item>
                             ))}
                         </DropdownButton>

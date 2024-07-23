@@ -4,8 +4,23 @@ import "./Notes.css";
 import NoteCard from './NoteCard';
 import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
-import {Button, Col, Form, Offcanvas, Row} from "react-bootstrap";
+import {Button, Col, Dropdown, DropdownButton, Form, Offcanvas, Row} from "react-bootstrap";
 import TextareaAutosize from "react-textarea-autosize";
+
+const themeList = [
+  {
+    "id": "71e50e69-cfea-4db7-a06d-35cfe81ac4aa",
+    "created_date": "2024-06-16T23:08:22.416462",
+    "telegram_username": "test_username",
+    "name": "test_theme1"
+  },
+  {
+    "id": "e7e06080-2da1-4b08-833b-3079357b58d2",
+    "created_date": "2024-06-16T23:08:22.416474",
+    "telegram_username": "test_username",
+    "name": "test_theme2"
+  }
+];
 
 const notesTest = [
     {
@@ -60,6 +75,8 @@ const notesTest = [
 
 const Notes = () => {
     const [notes, setNotes] = useState([]);
+    const [themes, setThemes] = useState([]);
+    const [sortedNotes, setSortedNotes] = useState([]);
     const [currentNote, setCurrentNote] = useState(null);
     const [showFullInfo, setShowFullInfo] = useState(false);
     const navigate = useNavigate();
@@ -80,6 +97,8 @@ const Notes = () => {
         // };
         // fetchNotes();
         setNotes(notesTest)
+        setSortedNotes(notesTest)
+        setThemes(themeList)
 
         mainButton("Create note", true, null, () => {
             console.log("Button in Component A clicked");
@@ -93,7 +112,7 @@ const Notes = () => {
             // Если информация о заметке показана и текущая заметка обновлена, устанавливаем кнопку "Edit"
             mainButton("Edit", true, "#dea635", () => {
                 console.log("Button in Component A clicked");
-                navigate('/add', {state: {note: currentNote}});
+                navigate('/add', {state: {note: currentNote, themes: themes}});
             });
         } else {
             // В противном случае возвращаем кнопку "Create note"
@@ -115,14 +134,29 @@ const Notes = () => {
         setShowFullInfo(true);
     }
 
+    const sortNotesByTheme = (theme_name) => {
+        console.log("Sort by theme: " + theme_name)
+        setSortedNotes(notes.filter((note) => note.theme_name === theme_name))
+    };
+
     // const handleChangeNote = () => {
     //     navigate('/add', {state: {note: currentNote}});
     // };
 
     return (
         <div className="container mt-5">
+            <div className="row mb-3 justify-content-center">
+                <DropdownButton id="dropdown-basic-button" title="Select theme">
+                    <Dropdown.Item onClick={() => setSortedNotes(notes)}>All</Dropdown.Item>
+                    {themes.map((theme) => (
+                        <Dropdown.Item onClick={() => sortNotesByTheme(theme.name)}>
+                            {theme.name}
+                        </Dropdown.Item>
+                    ))}
+                </DropdownButton>
+            </div>
             <div className="row justify-content-center">
-                {notes.map((note, index) => (
+                {sortedNotes.map((note, index) => (
                     <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch"
                          onClick={() => handleFullInfoShow(note)}>
                         <NoteCard note={note}/>
