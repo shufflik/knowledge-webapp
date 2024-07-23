@@ -154,7 +154,7 @@ const AddNote = () => {
                     theme_name: '',
                     is_favorite: false
                 })
-                navigate('/add', { replace: true, state: {} });
+                // navigate('/add', { replace: true, state: {} });
                 showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
             }
         });
@@ -390,7 +390,7 @@ const AddNote = () => {
                         />
                     </InputGroup>
                 </Form>
-                <Button onClick={handleSaveNote}> Save note </Button>
+                {/*<Button onClick={handleSaveNote}> Save note </Button>*/}
             </div>
         </div>
     );
