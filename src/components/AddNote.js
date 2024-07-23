@@ -90,17 +90,19 @@ const AddNote = () => {
 
     useEffect(() => {
         if (location.state && (location.state.note || location.state.themes)) {
-            const note = location.state.note
-            setSelectedNote({
-                description: note.description,
-                id: note.id,
-                link: note.link,
-                title: note.title,
-                theme_name: note.theme_name,
-                is_favorite: note.is_favorite
-            });
-            setSelectedTheme(note.theme_name);
-            setIsFavorite(note.is_favorite);
+            if (location.state.note) {
+                const note = location.state.note
+                setSelectedNote({
+                    description: note.description,
+                    id: note.id,
+                    link: note.link,
+                    title: note.title,
+                    theme_name: note.theme_name,
+                    is_favorite: note.is_favorite
+                });
+                setSelectedTheme(note.theme_name);
+                setIsFavorite(note.is_favorite);
+            }
             setAvailableThemes(location.state.themes)
             navigate('/add', { replace: true, state: {} });
         }
