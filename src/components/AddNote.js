@@ -127,30 +127,8 @@ const AddNote = () => {
 
         setNotSavedNotes(notSavedNotesTest);
         mainButton("Save note", true, "#2cab37", () => {
-            const form = document.getElementById('custom-form');
-            if (form.checkValidity() === false) {
-                form.reportValidity();
-            } else {
-                console.log("Form is valid and can be submitted");
-                const formValues = {};
-                form.querySelectorAll('input, textarea').forEach((input) => {
-                    if (input.id === 'is-favorite') {
-                        formValues[input.id] = input.checked;
-                    } else {
-                        formValues[input.id] = input.value;
-                    }
-                });
-                setSelectedUnSavedNote({
-                    description: '',
-                    id: '',
-                    link: '',
-                    title: '',
-                    theme_name: '',
-                    is_favorite: false
-                })
-                navigate('/add', { replace: true, state: {} });
-                showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
-            }
+            handleSaveNote()
+            navigate('/add', { replace: true, state: {} });
         });
         backButton(true, () => {
             navigate('/')
@@ -203,6 +181,32 @@ const AddNote = () => {
         }
         setValidated(true);
     };
+
+    const handleSaveNote = () => {
+        const form = document.getElementById('custom-form');
+        if (form.checkValidity() === false) {
+            form.reportValidity();
+        } else {
+            console.log("Form is valid and can be submitted");
+            const formValues = {};
+            form.querySelectorAll('input, textarea').forEach((input) => {
+                if (input.id === 'is-favorite') {
+                    formValues[input.id] = input.checked;
+                } else {
+                    formValues[input.id] = input.value;
+                }
+            });
+            setSelectedUnSavedNote({
+                description: '',
+                id: '',
+                link: '',
+                title: '',
+                theme_name: '',
+                is_favorite: false
+            })
+            showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+        }
+    }
 
     return (
         <div className="container">
