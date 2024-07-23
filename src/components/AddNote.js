@@ -106,7 +106,7 @@ const AddNote = () => {
             if (location.state.themes) {
                 setAvailableThemes(location.state.themes)
             }
-            navigate('/add', { replace: true, state: {} });
+            navigate('/add', { replace: true, state: {}});
         }
     }, [location.state, navigate]);
 

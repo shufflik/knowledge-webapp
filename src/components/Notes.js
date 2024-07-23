@@ -101,10 +101,10 @@ const Notes = () => {
         setThemes(themeList)
 
         mainButton("Create note", true, null, () => {
-            navigate('/add', {state: {themes: themes}});
+            navigate('/add');
         });
         backButton(false, null)
-    }, [navigate, themes]);
+    }, [navigate]);
 
     useEffect(() => {
         if (showFullInfo && currentNote) {
