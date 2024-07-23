@@ -109,37 +109,41 @@ const AddNote = () => {
 
     useEffect(() => {
         console.log("location state: " + location.state)
-        let notify = 'None'
         if (location.state && location.state.note) {
             console.log("Pass location state: " + location.state)
-            setSelectedUnSavedNote(prevState => {
-                if (prevState.id !== location.state.note.id) {
-                    notify = 'prevState.id !== location.state.note.id'
-                    return {
-                        description: location.state.note.description,
-                        id: location.state.note.id,
-                        link: location.state.note.link,
-                        title: location.state.note.title,
-                        theme_name: location.state.note.theme_name,
-                        is_favorite: location.state.note.is_favorite
-                    }
-                } else {
-                    notify = 'prevState.id === location.state.note.id'
-                    return {
-                        description: prevState.description,
-                        id: prevState.id,
-                        link: prevState.link,
-                        title: prevState.title,
-                        theme_name: prevState.theme_name,
-                        is_favorite: prevState.is_favorite
-                    }
-                }
+            // setSelectedUnSavedNote(prevState => {
+            //     if (prevState.id !== location.state.note.id) {
+            //         return {
+            //             description: location.state.note.description,
+            //             id: location.state.note.id,
+            //             link: location.state.note.link,
+            //             title: location.state.note.title,
+            //             theme_name: location.state.note.theme_name,
+            //             is_favorite: location.state.note.is_favorite
+            //         }
+            //     } else {
+            //         return {
+            //             description: prevState.description,
+            //             id: prevState.id,
+            //             link: prevState.link,
+            //             title: prevState.title,
+            //             theme_name: prevState.theme_name,
+            //             is_favorite: prevState.is_favorite
+            //         }
+            //     }
+            // });
+            setSelectedUnSavedNote({
+                description: location.state.note.description,
+                id: location.state.note.id,
+                link: location.state.note.link,
+                title: location.state.note.title,
+                theme_name: location.state.note.theme_name,
+                is_favorite: location.state.note.is_favorite
             });
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
-            navigate('/add', { replace: true, state: {} });
+            // navigate('/add', { replace: true, state: {} });
         }
-        showAlertPopup(`Notify: ${notify}`);
     }, [location.state, navigate]);
 
     useEffect(() => {
@@ -178,6 +182,7 @@ const AddNote = () => {
                     }
                 });
                 showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+                setSelectedUnSavedNote(null)
             }
         });
         backButton(true, () => {
