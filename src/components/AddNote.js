@@ -109,10 +109,12 @@ const AddNote = () => {
 
     useEffect(() => {
         console.log("location state: " + location.state)
+        let notify = 'None'
         if (location.state && location.state.note) {
             console.log("Pass location state: " + location.state)
             setSelectedUnSavedNote(prevState => {
                 if (prevState.id !== location.state.note.id) {
+                    notify = 'prevState.id !== location.state.note.id'
                     return {
                         description: location.state.note.description,
                         id: location.state.note.id,
@@ -122,6 +124,7 @@ const AddNote = () => {
                         is_favorite: location.state.note.is_favorite
                     }
                 } else {
+                    notify = 'prevState.id === location.state.note.id'
                     return {
                         description: prevState.description,
                         id: prevState.id,
@@ -136,6 +139,7 @@ const AddNote = () => {
             setIsFavorite(location.state.note.is_favorite);
             navigate('/add', { replace: true, state: {} });
         }
+        showAlertPopup(`Notify: ${notify}`);
     }, [location.state, navigate]);
 
     useEffect(() => {
