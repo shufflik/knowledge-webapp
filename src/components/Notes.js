@@ -121,7 +121,7 @@ const Notes = () => {
                 navigate('/add');
             });
         }
-    }, [showFullInfo, currentNote, navigate]);
+    }, [showFullInfo, currentNote, themes, navigate]);
 
     const handleFullInfoClose = () => {
         setShowFullInfo(false);
