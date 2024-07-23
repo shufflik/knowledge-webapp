@@ -77,7 +77,6 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: white; /* Ensure the background matches your container's background */
     padding-top: 10px; /* Adjust as needed */
     padding-bottom: 10px; /* Adjust as needed */
 }

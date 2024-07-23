@@ -4,7 +4,7 @@ import "./Notes.css";
 import NoteCard from './NoteCard';
 import {backButton, mainButton} from "../telegram";
 import {useNavigate} from "react-router-dom";
-import {Button, Col, Dropdown, DropdownButton, Form, Offcanvas, Row} from "react-bootstrap";
+import {Button, Col, Dropdown, DropdownButton, Form, Image, Offcanvas, Row} from "react-bootstrap";
 import TextareaAutosize from "react-textarea-autosize";
 
 const themeList = [
@@ -258,12 +258,16 @@ const Notes = () => {
                 </DropdownButton>
             </div>
             <div className="row justify-content-center">
-                {notes.map((note, index) => (
-                    <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch"
-                         onClick={() => handleFullInfoShow(note)}>
-                        <NoteCard note={note}/>
-                    </div>
-                ))}
+                {notes.length === 0
+                    ? (<Image src={`${process.env.PUBLIC_URL}/no-record-found.png`} className="card-img-top"
+                            style={{width: 'auto', height: '100%'}}/>)
+                    : (notes.map((note, index) => (
+                        <div key={index} className="col-6 col-sm-5 col-md-4 mb-3 d-flex align-items-stretch"
+                             onClick={() => handleFullInfoShow(note)}>
+                            <NoteCard note={note}/>
+                        </div>
+                    )))
+                }
             </div>
             <Offcanvas className="custom-offcanvas" show={showFullInfo} onHide={handleFullInfoClose} placement="bottom"
                        style={{height: "80%"}}>
