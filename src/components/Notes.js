@@ -104,7 +104,7 @@ const Notes = () => {
             navigate('/add', {state: {themes: themes}});
         });
         backButton(false, null)
-    }, [navigate]);
+    }, [navigate, themes]);
 
     useEffect(() => {
         if (showFullInfo && currentNote) {
