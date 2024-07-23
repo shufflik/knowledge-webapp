@@ -86,52 +86,11 @@ const AddNote = () => {
     const location = useLocation();
     const inputRef = useRef(null);
     const navigate = useNavigate();
-    // const isCanBeSaved = selectedUnSavedNote.id.trim() !== '' &&
-    //                      selectedUnSavedNote.title.trim() !== '' &&
-    //                      selectedUnSavedNote.description.trim() !== '' &&
-    //                      selectedUnSavedNote.link.trim() !== '' &&
-    //                      selectedTheme.trim() !== '';
-    //
-    // const setupMainButton = useCallback(() => {
-    //     mainButton("Save note", isCanBeSaved, "#2cab37", () => {
-    //         console.log("Button in Component A clicked");
-    //         if (!isCanBeSaved) {
-    //             showAlertPopup("Required fields are empty! "
-    //                 + "\nId: " + selectedUnSavedNote.id
-    //                 + "\ntitle: " + selectedUnSavedNote.title
-    //                 + "\ndesc: " + selectedUnSavedNote.description
-    //                 + "\nlink: " + selectedUnSavedNote.link
-    //                 + "\ntheme: " + selectedTheme);
-    //         }
-    //         // Your logic for saving the note
-    //     });
-    // }, [isCanBeSaved, selectedUnSavedNote.id, selectedUnSavedNote.title, selectedUnSavedNote.description, selectedUnSavedNote.link, selectedTheme]);
 
     useEffect(() => {
         console.log("location state: " + location.state)
         if (location.state && location.state.note) {
             console.log("Pass location state: " + location.state)
-            // setSelectedUnSavedNote(prevState => {
-            //     if (prevState.id !== location.state.note.id) {
-            //         return {
-            //             description: location.state.note.description,
-            //             id: location.state.note.id,
-            //             link: location.state.note.link,
-            //             title: location.state.note.title,
-            //             theme_name: location.state.note.theme_name,
-            //             is_favorite: location.state.note.is_favorite
-            //         }
-            //     } else {
-            //         return {
-            //             description: prevState.description,
-            //             id: prevState.id,
-            //             link: prevState.link,
-            //             title: prevState.title,
-            //             theme_name: prevState.theme_name,
-            //             is_favorite: prevState.is_favorite
-            //         }
-            //     }
-            // });
             setSelectedUnSavedNote({
                 description: location.state.note.description,
                 id: location.state.note.id,
@@ -142,60 +101,66 @@ const AddNote = () => {
             });
             setSelectedTheme(location.state.note.theme_name);
             setIsFavorite(location.state.note.is_favorite);
-            // navigate('/add', { replace: true, state: {} });
+            navigate('/add', { replace: true, state: {} });
         }
     }, [location.state, navigate]);
 
     useEffect(() => {
-        // console.info('Fetching not saved notes..');
-        // const fetchNotSavedNotes = async () => {
-        //     try {
-        //         const response = await axios.get('http://127.0.0.1:8000/notes',
-        //             {
-        //                 params: {username: "test", is_saved: false}
-        //             }
-        //         );
-        //         console.info(response.data)
-        //         setNotSavedNotes(response.data);
-        //         if (response.data.length > 0) {
-        //             setShowModal(true);
-        //         }
-        //     } catch (error) {
-        //         console.error('Error fetching not saved notes:', error);
-        //     }
-        // };
-        // fetchNotSavedNotes();
-
         setNotSavedNotes(notSavedNotesTest);
-        mainButton("Save note", true, "#2cab37", () => {
-            const form = document.getElementById('custom-form');
-            if (form.checkValidity() === false) {
-                form.reportValidity();
-            } else {
-                console.log("Form is valid and can be submitted");
-                const formValues = {};
-                form.querySelectorAll('input, textarea').forEach((input) => {
-                    if (input.id === 'is-favorite') {
-                        formValues[input.id] = input.checked;
-                    } else {
-                        formValues[input.id] = input.value;
-                    }
-                });
-                // showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
-                setSelectedUnSavedNote({
-                    description: '',
-                    id: '',
-                    link: '',
-                    title: '',
-                    theme_name: '',
-                    is_favorite: false
-                })
-            }
-        });
-        backButton(true, () => {
-            navigate('/')
-        })
+        mainButton("Save note", true, "#2cab37", handleSaveNote);
+        backButton(true, () => navigate('/'));
     }, [navigate]);
+
+    // useEffect(() => {
+    //     // console.info('Fetching not saved notes..');
+    //     // const fetchNotSavedNotes = async () => {
+    //     //     try {
+    //     //         const response = await axios.get('http://127.0.0.1:8000/notes',
+    //     //             {
+    //     //                 params: {username: "test", is_saved: false}
+    //     //             }
+    //     //         );
+    //     //         console.info(response.data)
+    //     //         setNotSavedNotes(response.data);
+    //     //         if (response.data.length > 0) {
+    //     //             setShowModal(true);
+    //     //         }
+    //     //     } catch (error) {
+    //     //         console.error('Error fetching not saved notes:', error);
+    //     //     }
+    //     // };
+    //     // fetchNotSavedNotes();
+    //
+    //     setNotSavedNotes(notSavedNotesTest);
+    //     mainButton("Save note", true, "#2cab37", () => {
+    //         const form = document.getElementById('custom-form');
+    //         if (form.checkValidity() === false) {
+    //             form.reportValidity();
+    //         } else {
+    //             console.log("Form is valid and can be submitted");
+    //             const formValues = {};
+    //             form.querySelectorAll('input, textarea').forEach((input) => {
+    //                 if (input.id === 'is-favorite') {
+    //                     formValues[input.id] = input.checked;
+    //                 } else {
+    //                     formValues[input.id] = input.value;
+    //                 }
+    //             });
+    //             showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+    //             setSelectedUnSavedNote({
+    //                 description: '',
+    //                 id: '',
+    //                 link: '',
+    //                 title: '',
+    //                 theme_name: '',
+    //                 is_favorite: false
+    //             })
+    //         }
+    //     });
+    //     backButton(true, () => {
+    //         navigate('/')
+    //     })
+    // }, [navigate]);
 
     // Обработка скрытия клавиатура
     useEffect(() => {
@@ -274,6 +239,14 @@ const AddNote = () => {
             });
             console.log(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
             showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
+            setSelectedUnSavedNote({
+                description: '',
+                id: '',
+                link: '',
+                title: '',
+                theme_name: '',
+                is_favorite: false
+            });
         }
     };
 
