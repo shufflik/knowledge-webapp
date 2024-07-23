@@ -117,6 +117,7 @@ const AddNote = () => {
         setNotSavedNotes(notSavedNotesTest);
         mainButton("Save note", true, "#2cab37", () => {
             let alertText = handleSaveNote()
+            navigate('/add', {replace: true, state: {}});
             if (alertText) {
                 navigate('/', {replace: true, state: {}});
                 showAlertPopup(alertText);
