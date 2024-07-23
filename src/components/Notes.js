@@ -70,6 +70,102 @@ const notesTest = [
         "title": "saved_test_title4",
         "description": "saved_test_description4",
         "is_favorite": false
+    },
+    {
+        "id": "96c96df5-3b92-4eda-9e1e-a2ee3cf8a620",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title5",
+        "description": "saved_test_description5",
+        "is_favorite": false
+    },
+    {
+        "id": "cd65f52c-019c-4c5c-9926-2a6ee885421f",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title6",
+        "description": "saved_test_description6",
+        "is_favorite": false
+    },
+    {
+        "id": "488ac770-75bf-4847-9620-bbb415c6d1f6",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title7",
+        "description": "saved_test_description7",
+        "is_favorite": false
+    },
+    {
+        "id": "2c2cef6d-94aa-4199-af15-550b1023f975",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title8",
+        "description": "saved_test_description8",
+        "is_favorite": false
+    },
+    {
+        "id": "337a9635-714c-455b-aa14-c39db5740636",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title9",
+        "description": "saved_test_description9",
+        "is_favorite": false
+    },
+    {
+        "id": "da6c0938-b8b7-4301-80cf-fc9d120ccc30",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title10",
+        "description": "saved_test_description10",
+        "is_favorite": false
+    },
+    {
+        "id": "0e3f460e-7207-44a4-9aac-d8099e7b302a",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title11",
+        "description": "saved_test_description11",
+        "is_favorite": false
+    },
+    {
+        "id": "df9d5d91-8a82-45e4-ae3c-f217609579e5",
+        "created": true,
+        "created_date": "2024-06-15T17:00:47.524568",
+        "message_id": "1237",
+        "telegram_username": "test_username",
+        "link": "https://fastapi.tiangolo.com/tutorial/query-params",
+        "theme_name": "test_theme2",
+        "title": "saved_test_title12",
+        "description": "saved_test_description12",
+        "is_favorite": false
     }
 ];
 
@@ -141,7 +237,7 @@ const Notes = () => {
     // };
 
     return (
-        <div className="container mt-5">
+        <div className="container">
             <div className="row mb-3 justify-content-center">
                 <DropdownButton id="dropdown-basic-button" title="Select theme">
                     <Dropdown.Item onClick={() => setSortedNotes(notes)}>All</Dropdown.Item>

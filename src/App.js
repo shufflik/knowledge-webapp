@@ -12,7 +12,7 @@ function App() {
         <Router basename="/knowledge-webapp">
             <div className="App">
                 <TelegramSetup/>
-                <div className="container mt-5 pt-5">
+                <div className="container mt-5">
                     <Routes>
                         <Route index path="/" element={<Notes/>}/>
                         <Route path="/home" element={<Home/>}/>

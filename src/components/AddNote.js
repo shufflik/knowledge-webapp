@@ -6,20 +6,6 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {Button, DropdownButton, InputGroup, Dropdown, Offcanvas, Form} from "react-bootstrap";
 import {Textfit} from "react-textfit";
 
-// const themeList = [
-//   {
-//     "id": "71e50e69-cfea-4db7-a06d-35cfe81ac4aa",
-//     "created_date": "2024-06-16T23:08:22.416462",
-//     "telegram_username": "test_username",
-//     "name": "test_theme1"
-//   },
-//   {
-//     "id": "e7e06080-2da1-4b08-833b-3079357b58d2",
-//     "created_date": "2024-06-16T23:08:22.416474",
-//     "telegram_username": "test_username",
-//     "name": "test_theme2"
-//   }
-// ]
 
 const notSavedNotesTest = [
     {
@@ -135,32 +121,6 @@ const AddNote = () => {
             if (alertText) {
                 showAlertPopup(alertText);
             }
-
-            // const form = document.getElementById('custom-form');
-            // if (form.checkValidity() === false) {
-            //     form.reportValidity();
-            //     navigate('/add', {replace: true, state: {}});
-            // } else {
-            //     console.log("Form is valid and can be submitted");
-            //     const formValues = {};
-            //     form.querySelectorAll('input, textarea').forEach((input) => {
-            //         if (input.id === 'is-favorite') {
-            //             formValues[input.id] = input.checked;
-            //         } else {
-            //             formValues[input.id] = input.value;
-            //         }
-            //     });
-            //     setSelectedNote({
-            //         description: '',
-            //         id: '',
-            //         link: '',
-            //         title: '',
-            //         theme_name: '',
-            //         is_favorite: false
-            //     })
-            //     navigate('/add', {replace: true, state: {}});
-            //     // showAlertPopup(`VALID! Form keys: ${Object.keys(formValues)} values: ${Object.values(formValues)}`);
-            // }
         });
         backButton(true, () => {
             navigate('/')
