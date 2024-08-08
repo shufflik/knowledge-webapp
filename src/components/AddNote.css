@@ -8,3 +8,45 @@
   margin-right: auto;
   display: block;
 }
+
+.custom-offcanvas {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.custom-offcanvas-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 40px;
+    background-color: var(--tg-theme-header-bg-color);
+    /*background-color: #fed85d;*/
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.custom-offcanvas-header .offcanvas-title {
+    position: absolute;
+    top: 20px;
+}
+
+.custom-offcanvas-header .btn-close {
+    background-size: 10px;
+    background-color: #a4a4a4;
+    border-radius: 20px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.custom-offcanvas-body {
+    color: var(--tg-theme-text-color);
+    background-color: var(--tg-theme-header-bg-color);
+    /*border-top-left-radius: 25px;*/
+    /*border-top-right-radius: 25px;*/
+    /*box-shadow: 0 0 20px rgb(65, 65, 63); !* Желтое свечение *!*/
+    padding-top: 20px; /* Дополнительное пространство сверху */
+}

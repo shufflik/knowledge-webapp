@@ -165,6 +165,7 @@ const AddNote = () => {
         });
         setIsFavorite(false);
         setShow(false);
+        setMainButtonVisibility(true)
     };
 
     const handleSubmit = (event) => {
@@ -217,12 +218,12 @@ const AddNote = () => {
                 </span>
                 )}
             </Button>
-            <Offcanvas show={show} onHide={handleOffcanvasClose} placement="bottom"
-                       style={{height: '70%', color: '#e8e8e8', backgroundColor: '#262626'}}>
-                <Offcanvas.Header closeButton>
+            <Offcanvas className="custom-offcanvas" show={show} onHide={handleOffcanvasClose}
+                       placement="bottom" style={{height: '80%'}}>
+                <Offcanvas.Header closeButton className="mb-4 custom-offcanvas-header">
                     <Offcanvas.Title>Not saved notes</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body>
+                <Offcanvas.Body className="custom-offcanvas-body">
                     <div className="row justify-content-center">
                         {notSavedNote && notSavedNote.map((note, index) => (
                             <div key={index} className="row mb-3">
