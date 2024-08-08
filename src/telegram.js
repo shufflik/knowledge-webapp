@@ -55,6 +55,14 @@ export const mainButton = (buttonText, isEnabled, color, callback) => {
   }
 };
 
+export const setMainButtonVisibility = (isEnabled) => {
+  if (isEnabled) {
+    tg.MainButton.show();
+  } else {
+    tg.MainButton.hide();
+  }
+}
+
 export const backButton = (isEnabled, callback) => {
   if (isEnabled) {
     tg.BackButton.show();

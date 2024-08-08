@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import './AddNote.css';
 // import axios from "axios";
-import {backButton, mainButton, showAlertPopup} from "../telegram";
+import {backButton, mainButton, setMainButtonVisibility, showAlertPopup} from "../telegram";
 import {useLocation, useNavigate} from "react-router-dom";
 import {Button, DropdownButton, InputGroup, Dropdown, Offcanvas, Form} from "react-bootstrap";
 import {Textfit} from "react-textfit";
@@ -142,9 +142,11 @@ const AddNote = () => {
 
     const handleOffcanvasClose = () => {
         setShow(false);
+        setMainButtonVisibility(true)
     }
     const handleOffcanvasShow = () => {
         setShow(true);
+        setMainButtonVisibility(false)
     }
     const handleSelectTheme = (eventKey) => {
         setSelectedTheme(eventKey);
