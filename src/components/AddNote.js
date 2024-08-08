@@ -220,7 +220,7 @@ const AddNote = () => {
             </Button>
             <Offcanvas className="custom-offcanvas" show={show} onHide={handleOffcanvasClose}
                        placement="bottom" style={{height: '80%'}}>
-                <Offcanvas.Header closeButton className="mb-4 custom-offcanvas-header">
+                <Offcanvas.Header closeButton className="custom-offcanvas-header">
                     <Offcanvas.Title>Not saved notes</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body className="custom-offcanvas-body">

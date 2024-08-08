@@ -28,7 +28,7 @@
 
 .custom-offcanvas-header .offcanvas-title {
     position: absolute;
-    top: 20px;
+    top: 25px;
 }
 
 .custom-offcanvas-header .btn-close {
@@ -48,5 +48,5 @@
     /*border-top-left-radius: 25px;*/
     /*border-top-right-radius: 25px;*/
     /*box-shadow: 0 0 20px rgb(65, 65, 63); !* Желтое свечение *!*/
-    padding-top: 20px; /* Дополнительное пространство сверху */
+    padding-top: 45px; /* Дополнительное пространство сверху */
 }
