@@ -1,0 +1,39 @@
+.scrollable-theme-card-container {
+    max-height: calc(100vh - 110px);
+    overflow-y: auto; /* Включаем вертикальный скролл */
+}
+
+.create-button {
+    border: none !important;
+    background-color: #7453d9 !important;
+    color: white !important; /* Цвет текста кнопки */
+    outline: none !important; /* Убирает выделение при фокусе */
+    box-shadow: none !important; /* Убирает тень */
+}
+
+.save-button {
+    width: 20%;
+    border: none !important;
+    background-color: #7fbd3e !important;
+    color: white !important; /* Цвет текста кнопки */
+    outline: none !important; /* Убирает выделение при фокусе */
+    box-shadow: none !important; /* Убирает тень */
+}
+
+.edit-button {
+    width: 20%;
+    border: none !important;
+    background-color: #eec41c !important;
+    color: white !important; /* Цвет текста кнопки */
+    outline: none !important; /* Убирает выделение при фокусе */
+    box-shadow: none !important; /* Убирает тень */
+}
+
+.delete-button {
+    width: 20%;
+    border: none !important;
+    background-color: #cc4526 !important;
+    color: white !important; /* Цвет текста кнопки */
+    outline: none !important; /* Убирает выделение при фокусе */
+    box-shadow: none !important; /* Убирает тень */
+}

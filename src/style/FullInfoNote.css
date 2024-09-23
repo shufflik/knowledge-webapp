@@ -1,0 +1,57 @@
+.form-control {
+    background-color: #fafafa;
+}
+
+@keyframes expandAndContract {
+    0% {
+        transform: scaleX(1); /* Исходное состояние */
+    }
+    50% {
+        transform: scaleX(1.05); /* Увеличиваем на 5% в ширину */
+    }
+    100% {
+        transform: scaleX(1); /* Возвращаемся к исходному состоянию */
+    }
+}
+
+.textarea-animation {
+    transition: transform 0.3s ease;
+}
+
+.textarea-enlarged {
+    animation: expandAndContract 0.5s ease; /* Применяем анимацию */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1.05); /* Увеличиваем элемент на 5% */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.pulse-animation {
+    animation: pulse 0.5s ease; /* Пульсация на 0.5 секунд */
+}
+
+.custom-fullinfo-card {
+    border-radius: 15px;
+}
+
+.fullinfo-modal .modal-header {
+    border-bottom: none;
+}
+
+.favorite-modal .modal-content {
+    background: linear-gradient(180deg, #ffe092 0%, #ffaf02 100%);
+    border-radius: 20px;
+}
+
+.regular-modal .modal-content {
+    background: linear-gradient(180deg, #fffff7 0%, hsla(186, 33%, 94%, 1) 100%);
+    border-radius: 20px;
+}

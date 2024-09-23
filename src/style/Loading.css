@@ -1,0 +1,13 @@
+.custom-save-modal .modal-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+    border: none;
+}
+
+.custom-save-modal .modal-body {
+    position: relative;
+    z-index: 10; /* Устанавливает modal-body над modal-content чтоб не был прозрачным*/
+    display: flex;
+    justify-content: center; /* Центрирование по горизонтали */
+    align-items: center;    /* Центрирование по вертикали */
+    height: 100%;           /* Чтобы Flexbox занимал всю высоту */
+}

@@ -1,0 +1,214 @@
+.modal-title {
+  color: #121212;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.custom-offcanvas-unsaved {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    transition-duration: .2s;
+}
+
+.custom-offcanvas-body-unsaved {
+    padding-top: 45px; /* Дополнительное пространство сверху */
+}
+
+.scrollable-card-container {
+    max-height: calc(100vh - 180px);
+    overflow-y: auto; /* Включаем вертикальный скролл */
+}
+
+.dropdown-menu {
+    max-height: 300px; /* Ограничиваем высоту */
+    overflow-y: auto; /* Включаем прокрутку */
+}
+
+.sticky-dropdown {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding-top: 10px; /* Adjust as needed */
+    padding-bottom: 10px; /* Adjust as needed */
+}
+
+.create-new-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 7%; /* Высота кнопки */
+    font-size: 18px; /* Размер текста */
+    border: none !important;
+    border-radius: 15px !important;
+    background-color: #9ACD32 !important;
+    color: white !important; /* Цвет текста кнопки */
+    outline: none !important; /* Убирает выделение при фокусе */
+    box-shadow: none !important; /* Убирает тень */
+}
+
+.centered-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование изображения */
+}
+
+.create-unsaved-badge {
+    position: absolute;
+    right: -37px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.form-select-animated {
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    10% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+    20% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse-button {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.025);
+        opacity: 0.8;
+    }
+    70% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.pulse-animation {
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.pulse-animation-button {
+    animation: pulse-button 1s ease-in-out infinite;
+}
+
+
+/*--------FullInfoNote--------*/
+.custom-textarea {
+    white-space: pre-wrap;
+    border: none;
+    resize: none;
+    box-shadow: none;
+    padding: 0;
+    font-family: 'Rubik', sans-serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+.custom-label {
+    font-family: "Trebuchet MS";
+    font-weight: bold;
+    text-align: center;
+}
+
+.image-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;  /* Установите нужный размер контейнера */
+    height: 90px; /* Установите нужный размер контейнера */
+    margin: 0 auto;
+}
+
+.image-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255, 235, 59, 1)); /* Желтое свечение вокруг изображения */
+}
+
+.custom-offcanvas {
+    height: 100% !important;
+    background-color: rgba(108, 107, 107, 0.8) !important;
+    position: relative;
+}
+
+.custom-offcanvas-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 40px;
+}
+
+.custom-offcanvas-header .btn-close {
+    background-size: 10px;
+    background-color: #a4a4a4;
+    border-radius: 20px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.custom-offcanvas-body {
+    color: #121212 !important;
+    background-color: #FFFFF0 !important;
+    margin: 4%;
+    border-radius: 20px;
+    height: 100%;
+    max-width: 100%; /* Ограничиваем ширину */
+    box-shadow: 0 0 7px #FFFFF0; /* свечение */
+}
+
+.flip-card-back-header {
+    display: flex;
+    justify-content: space-between; /* Размещает изображения по краям */
+    align-items: center; /* Выравнивает изображения по вертикали */
+    width: 100%; /* Заполняет всю ширину Card.Footer */
+    height: 100%; /* Заполняет всю высоту Card.Footer */
+}
+
+.clickable-image {
+    max-height: 100%; /* Ограничиваем максимальную высоту изображений высотой контейнера */
+    max-width: 30px; /* Ограничиваем ширину изображений */
+    width: auto; /* Сохраняем пропорции */
+    height: auto; /* Обеспечиваем масштабирование в пределах заданной высоты */
+    cursor: pointer; /* Делаем изображение кликабельным */
+    transition: transform 0.2s ease; /* Анимация при наведении */
+}
+
+.clickable-image:active {
+    transform: scale(0.75); /* Уменьшение изображения при нажатии */
+}
