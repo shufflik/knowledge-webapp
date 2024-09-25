@@ -98,3 +98,5 @@ export const backButton = (isEnabled, callback) => {
 export const settingsButton = (callback) => {
   tg.SettingsButton.onClick(callback);
 };
+
+export default tg;
