@@ -57,9 +57,20 @@ const Themes = () => {
         setShowFullInfo(true);
     }
 
+    const handleCreateThemeClose = () => {
+        setShowCreateTheme(false)
+        setTimeout(() => {
+            setNewTheme(null)
+            setErrorMessage(null)
+            setIsNewThemeValid(true)
+        }, 300);
+    }
+
     const handleCreateTheme = async () => {
         const isThemeEmpty = newTheme.length === 0;
-        const isThemeExists = availableThemes.some(theme => theme.name.toLowerCase() === newTheme.toLowerCase());
+        const isThemeExists = availableThemes.some(theme =>
+            theme.name.trim().toLowerCase() === newTheme.trim().toLowerCase()
+        );
 
         if (isThemeEmpty || isThemeExists) {
             console.log(`Invalid creating new theme: ${newTheme}`);
@@ -117,7 +128,7 @@ const Themes = () => {
                 onConfirm={handleDeleteTheme}
                 title="Delete theme?"
             />
-            <Modal className="create-theme-modal" show={showCreateTheme} onHide={() => setShowCreateTheme(false)}
+            <Modal className="create-theme-modal" show={showCreateTheme} onHide={() => handleCreateThemeClose()}
                    centered aria-labelledby="custom-modal-styling-title">
                 <Modal.Body className="text-center">
                     <Form>

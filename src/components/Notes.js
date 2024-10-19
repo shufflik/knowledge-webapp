@@ -123,6 +123,7 @@ const Notes = () => {
         if (response.status === 200 || response.status === 201) {
             //Удаляем несохраненную заметку, если только что сохранили
             setNotSavedNotes(notSavedNotes.filter(unsaved => newNote.id !== unsaved.id))
+            await fetchAvailableThemes(true)
         }
         setLoadingModalWithStatus(response.status);
     };
@@ -212,7 +213,7 @@ const Notes = () => {
                 fetchNotSavedNotes={fetchNotSavedNotes}
             />
             <div className={!isFailedFetching ? "row justify-content-center mb-4" : ""}>
-                {availableThemes.length === 0 && !isAvailableThemesFetched ? (
+                {(availableThemes.length === 0 && !isAvailableThemesFetched) || !isAvailableThemesFetched ? (
                     <Spinner
                         as="span"
                         animation="border"

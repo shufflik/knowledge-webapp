@@ -17,6 +17,7 @@ import React, {useEffect, useState} from "react";
 import Loading from "./Loading";
 import {deleteNotes} from "../fetches";
 import {useLoadingModal} from "./useLoadingModal";
+import {openLink} from "../telegram";
 
 const CreateNote = (
     {
@@ -96,7 +97,7 @@ const CreateNote = (
 
     function handleThemeByName(theme_name) {
         let theme = availableThemes.filter((theme) => {
-            return theme.name.toLowerCase() === theme_name.toLowerCase()
+            return theme.name.trim().toLowerCase() === theme_name.trim().toLowerCase()
         })
 
         let name = theme.length > 0 ? theme[0].name : theme_name;
@@ -208,7 +209,14 @@ const CreateNote = (
                             </Form.Control.Feedback>
                         </InputGroup>
                         <InputGroup className="mb-3">
-                            <InputGroup.Text id="url-addon">url</InputGroup.Text>
+                            {newNote && newNote.link ? (
+                                <Button variant="outline-secondary" id="url-addon" style={{boxShadow: "none"}}
+                                        onClick={() => openLink(newNote.link)}>
+                                    Open
+                                </Button>
+                            ) : (
+                                <InputGroup.Text id="url-addon">url</InputGroup.Text>
+                            )}
                             <Form.Control
                                 required
                                 id="url"

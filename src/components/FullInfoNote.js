@@ -102,7 +102,8 @@ const FullInfoNote = (
         if (editNote?.title !== selectedNote?.title
             || editNote?.description !== selectedNote?.description
             || editNote?.link !== selectedNote?.link
-            || editNote?.is_favorite !== selectedNote?.is_favorite) {
+            || editNote?.is_favorite !== selectedNote?.is_favorite
+            || editNote?.theme_id !== selectedNote?.theme_id) {
             isValid = true
         }
 
@@ -174,10 +175,10 @@ const FullInfoNote = (
                     <Card.Body>
                         {!isEditMode ? (
                             <>
-                                <Card.Title style={{marginBottom: "20px", fontFamily: "Bookman Old Style, monospace", fontWeight: "bold"}}>
+                                <Card.Title style={{marginBottom: "20px", fontFamily: "Trebuchet MS", fontWeight: "bold", fontSize: "19px"}}>
                                     {editNote?.title}
                                 </Card.Title>
-                                <Card.Text style={{marginBottom: "35px", fontFamily: "Courier, monospace", fontWeight: "normal"}}>
+                                <Card.Text style={{marginBottom: "35px", fontFamily: "Courier, monospace", fontWeight: "normal", fontSize: "14px"}}>
                                     {editNote?.description}
                                 </Card.Text>
                                 <Button className="pulse-animation" style={{padding: "10px", width: "35%", backgroundColor: btnColor, borderColor: btnColor, boxShadow: "none", borderRadius: "9px"}}
